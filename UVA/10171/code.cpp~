@@ -1,0 +1,90 @@
+#include <bits/stdc++.h>
+#define MAX 100
+#define INF 100000
+#define S second
+#define F first
+
+using namespace std;
+
+void bfs(int x, vector<pair<int,int > > adj[MAX], int dist[MAX]){
+
+	priority_queue<pair<int,int> >fila;
+	for(int i = 0 ; i < MAX; i++) dist[i] = INF;
+
+	fila.push(make_pair(0,x));
+	dist[x] = 0;
+
+	while(!fila.empty()){
+
+		int top = fila.top().S;
+		int top_dist = fila.top().F;
+		fila.pop();
+
+		if(top_dist == dist[top]){
+			for(int i = 0; i < adj[top].size(); i++){
+				int visit = adj[top][i].F;
+				int visit_dist = adj[top][i].S;
+				if(visit_dist + top_dist < dist[visit]){
+					dist[visit] = visit_dist + top_dist;
+					fila.push(make_pair(dist[visit],visit));
+				}
+			}
+		}
+	}
+}
+
+vector<pair<int,int> > adj1[MAX];
+vector<pair<int,int> > adj2[MAX];
+
+int dist1[MAX];
+int dist2[MAX];
+
+void clear(){ for(int i = 0 ; i < MAX; i++) { adj1[i].clear(); adj2[i].clear();}}
+
+void answer(){
+
+	int mini = INF;
+	for(int i = 0; i < MAX; i++)
+		mini = min(mini,dist1[i] + dist2[i]);
+
+	if(mini == INF) printf("You will never meet.\n");
+	else {
+		printf("%d ",mini);
+		for(int i = 0 ; i < MAX; i++) 
+			if(dist1[i] + dist2[i] == mini) printf("%c ",'A' + 1);
+		printf("\n");
+	}
+}
+int main(){
+	
+	int n;
+	char a,di,x,y;
+	int d;
+	while(1){
+
+		scanf("%d",&n);
+		if(n == 0) break;
+		clear();
+		for(int i = 0; i < n; i++){		
+			scanf("%c %c %c %c %d",&a,&di,&x,&y,&d);
+			if(a == 'Y'){
+				adj1[x-'A'].push_back(make_pair(y-'A',d));
+				if(di == 'B')		
+					adj1[y-'A'].push_back(make_pair(x-'A',d));
+			}
+			else{
+				adj2[x-'A'].push_back(make_pair(y-'A',d));
+				if(di == 'B')
+					adj2[x-'A'].push_back(make_pair(y-'A',d));
+			}
+		}
+	
+		scanf("%c %c",&x,&y);
+		bfs(x - 'A',adj1,dist1);
+		bfs(y - 'A',adj2,dist2);
+
+		answer();
+
+	}
+	return 0;
+}

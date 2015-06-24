@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+#define MAX 105
+
+using namespace std;
+
+struct node{
+	int a;
+	int weight;
+	int b;	
+	node(int a = 0,int b = 0 ,int weight = 1){
+		this->a = a;
+		this->b = b;
+		this->weight = weight;
+	}
+};
+
+bool comp(node a, node b) { return a.weight < b.weight; }
+
+vector<node> adj;
+int uni[MAX];
+void reset(){ adj.clear(); for(int i = 0; i < MAX; i++) uni[i] = i; }
+int findSet(int x){return  (x == uni[x])? x : (uni[x] = findSet(uni[x]));}
+bool isSameSet(int a, int b) { return findSet(a) == findSet(b); }
+void connect(int a, int b) { uni[findSet(a)] = findSet(b);}
+
+int  kruskal(int size){
+	int answer = 0;
+	for(int i = 0 ; i < size; i++) 
+		if(!isSameSet(adj[i].a,adj[i].b))
+		{ answer += adj[i].weight; connect(adj[i].a,adj[i].b); }
+	return answer;
+}
+
+int main(){
+	int cont = 1;
+	int n,m;
+	int x,y,p;
+	int t;
+	scanf("%d",&t);
+	for(int k = 0; k < t; k++){
+		scanf("%d %d",&n,&m);
+		reset();
+		for(int i = 0 ; i < m; i++){
+			scanf("%d %d %d",&x,&y,&p);
+			adj.push_back(node(x,y,p));
+		}
+		sort(adj.begin(),adj.end(),comp);
+		kruskal(m);
+		printf("\n");
+	}
+
+	return 0;
+}

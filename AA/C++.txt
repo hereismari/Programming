@@ -1,0 +1,307 @@
+~~~~~~ C++ ~~~~~~
+
+~~~~> STRINGS:
+
+cin >> string  ----- lê até  próximo espaço,tab,newLine
+getline(cin, string) -- lê a linha toda(pega espaços,tab)
+
+pode concatenar strings que nem em python, só somar!
+
+str[indice].toupper - char to uppercase # include <cctype>
+Palvra toupper:
+	for (string::size_type i = 0; i < str.length(); i++)
+	{
+	    	str[i] = toupper (str[i]);
+	}
+
+str.find() --- retorna o index da primeira aparição do char/substring na string(funciona igual ao algo in algo2 em python)
+caso nao haja esse char na string a função irá retornar: string::npos
+str.rfind() --- retorna o index da primeira ocorrência após da posição indicada
+
+str.find_first_of --- retorna o index da primeira aparição de qualquer char passado como parâmetro para a função.
+str.find_firt_not_of --- retorna o index da primeira aparição de qualquer char DIFERENTE dos chars passados como parâmetro
+EX:
+	string text;
+	getline (cin, text);
+ 
+	if (text.find_first_of ("aeiouAEIOU") == string::npos)
+	{
+    		cout << "The text entered does not contain vowels!"
+         	<< endl;
+	}
+python: if ['a', 'e', 'i', 'o', 'u'] in str
+
+Boost Library:
+#include <iostream>
+#include <string>
+using namespace std;
+ 
+#include <boost/regex.hpp>
+ 
+int main ()
+{
+    boost::regex fullname_regex ("[A–Z]+[a–z]*, [A–Z][a–z]*");
+ 
+    string name;
+    cout << "Enter you full name: " << flush;
+ 
+    getline (cin, name);
+    if (! regex_match (name, fullname_regex))
+    {
+        cout << "Error: name not entered correctly" << endl;
+    }
+ 
+    return 0;
+}
+
+str.substr(i,j);
+a função substr retorna uma substring que inicia no indice i e a partir dele pega mais j chars.
+Caso seja passado apenas um parâmetro, a substring começará desse indíce e irá até o final da string.
+
+str.erase(i,j);
+a função erase apaga a substring que se inicia no indice i e vai ate o j. 
+
+str.replace (5,2,"was")
+a função replace substitui a substring que se inicia no indice i e vai ate o j. obs: a string que irá substituir a substring pode ser maior ou menor ou ter o mesmo len da anterior.
+
+#include <sstream>
+    // ...
+ 
+ostringstream person_info;   ---> armazena em uma variavel toda uma string
+ 
+person_info << "Name: "
+            << lastname << ", " << firstname << ". "; --> armazenando
+person_info << "Birthdate: "
+            << year << '–' << month << '–' << day << ", "
+            << "Age: " << current_year – year;
+ 
+    //  At this point, person_info.str() provides the result.
+    //  You could do, for instance:
+ 
+cout << "Person info:\n" << person_info.str() << endl;
+person_info.str(""); --> clear 
+
+ostringstream serve para quando queremos manipular uma variavel de formato "incomum", não é geralmente usada como no exemplo(só para imprimir)
+
+#include <sstream>
+// ... 
+
+string iso_date;
+int year, month, day;
+char dash1, dash2;    // Dummy variables to read delimiters
+
+cout << "Enter date (yyyy-mm-dd): " << flush;
+getline (cin, iso_date);
+
+istringstream (iso_date);    // load value into string stream
+iso_date >> year >> dash1 >> month >> dash2 >> day;
+
+istringstream seve para quando recebemos algo "incomum" como parâmetro(por exemplo) e temos que manipular essas informções separadamente.
+
+
+~~~~> ITERATORS(!= ponteiro, pois não é um endereço):
+
+> Utilizados para acessar dados armazenados em classes como vetores, mapas, listas,etc.
+
+> Iteradores apontam para um item que é parte de um grande conjunto de items. Por exemplo, toda forma de armazenamento de dados tem uma função chamada begin, que retorna um iterador apontando para o primeiro elemento desse conjunto, e outra chamada end, que retorana um iterador apontando para o último elemento desse conjunto. Na verdade, você pode acessar o elemento "dereferenciando" o iterador com um *, assim como dereferencia um ponteiro.
+
+Ex:
+std::vector<int> myIntVector;
+std::vector<int>::iterator myIntVectorIterator;
+
+> Alguns dos mais importantes tipos de iteradores são os foward, backward e o interador bidirectional. Esses iteradores podem ser utilizados para input e output(read e write). O iterador foward somente permite movimento em uma direção - do inicio para o fim.  ++, pode ser utilizado.
+
+> Para acessar um vector por exemplo é melhor usar um iterador. A estratégia é chamar a função begin para pegar um iterador, usar ++ para passar pelos objetos da estrutura, acessar cada objeto com o operador *, e terminar quando o iterado for igual ao iterador referente ao end.
+
+> Um iterador (e um const_iterator) permite percorrer um contêiner do começo ao fim. Um const_iterator, ao contrário de um iterador, dá acesso apenas em leitura para o elemento "apontado". Assim, um percurso com const_iterator mantém a constância do contêiner. É por isso que um contêiner "const" pode ser percorrido por const_iterators mas não por iterators. 
+
+> O princípio dos reverse_iterator e const_reverse_iterator é semelhante aos iterators e const_iterator exceto que o percurso é feito na direção oposta. 
+	Utilizamos então:
+	rbegin(): retorna um iterador que aponta para o último elemento
+	rend(): retorna um iterador que aponta para logo "antes" do primeiro elemento
+	++ : permite incrementar o reverse_iterator passando-o para o elemento seguinte.
+
+
+EX:
+using namespace std;
+
+vector<int> myIntVector;
+vector<int>::iterator myIntVectorIterator;
+
+// Add some elements to myIntVector
+myIntVector.push_back(1);
+myIntVector.push_back(4);
+myIntVector.push_back(8);
+
+for(myIntVectorIterator = myIntVector.begin(); 
+        myIntVectorIterator != myIntVector.end();
+        myIntVectorIterator++)
+{
+    cout<<*myIntVectorIterator<<" ";
+    //Should output 1 4 8
+}
+------------------------------------------
+vector<int>::iterator myIntVectorIterator;
+myIntVector.erase(myIntVectorIterator.begin(), myIntVectorIterator.end());
+--------------------------------------------
+myIntVector.erase(myIntVectorIterator.begin(), myIntVectorIterator.begin()+2);
+
+
+~~~~> PAIR
+
+Um "pair" é uma estrutura com dois elementos, possivelmente, de tipos diferentes. Alguns algoritmos da STL (find, por exemplo) retornam pares (posição do elemento encontrado e um booleano indicando se ele foi encontrado). 
+
+
+Complexidade: inserção e acesso em O(1) 
+#include <pair> // na prática este include é subentendido pois feito implicitamente quando utilizamos <vector>, <set> ... 
+#include <iostream> 
+#include <string> 
+
+int main(){ 
+  std::pair<int,std::string> p = std::make_pair(5,"pouet"); 
+  std::cout << p.first << ' ' << p.second << std::endl; 
+  return 0; 
+} 
+
+~~~~> LIST
+
+A classe "list" fornece uma estrutur genérica de listas ligadas que podem, eventualmente, conter duplicatas. 
+
+Complexidade
+Inserção (no início ou no fim da lista) : O(1)
+Pesquisa: O(n) em geral, O(1) para o primeiro e o ultimo elo
+
+
+Este exemplo mostra como inserir os valores 4,5,4,1 em uma lista e como exibir seu conteúdo: 
+#include <list> 
+#include <iostream> 
+
+int main(){ 
+  std::list<int> ma_liste; 
+  minha_lista.push_back(4); 
+  minha_lista.push_back(5); 
+  minha_lista.push_back(4); 
+  minha_lista.push_back(1); 
+  std::list<int>::const_iterator 
+    lit (minha_lista.begin()), 
+    lend(minha_lista.end()); 
+  for(;lit!=lend;++lit) std::cout << *lit << ' '; 
+  std::cout << std::endl;  
+  return 0; 
+} 
+
+~~~~> VECTOR
+
+A classe vetor é parecida com a tabela do C. Todos os elementos do vetor são adjacentes na memória, o que permite o acesso imediato a qualquer elemento. A vantagem do vetor comparado à tabela do C é a sua capacidade de realocar, automaticamente, em caso de necessidade, durante um push_back, por exemplo. No entanto, como uma tabela clássica, uma casa só pode ser acessada por um operador [ ] se ela foi alocada com antecedência (se não, um erro de segmentação é acionado). 
+
+
+Complexidade:
+Acesso O(1)
+Inserção: O(n) no começo do vetor (pop_back), O(1) no final do vetor (push_back). Nos dois casos as realocações podem ocorrer.
+
+
+Não devemos esquecer que a realocação de memória é cara em termos de tempo de cálculo. Portanto, se o tamanho de um vetor é conhecido de antemão, você deve criá-lo desse tamanho, tanto quanto for possível. 
+
+Exemplo : 
+#include <vector> 
+#include <iostream> 
+
+int main(){ 
+  std::vector<int> meu_vetor; 
+  meu_vetor.push_back(4); 
+  meu_vetor.push_back(2); 
+  meu_vetor.push_back(5); 
+  // para percorrer um vetor (mesma const) podemos utilizar os iterators ou os indexes 
+  for(std::size_t i=0;i<meu_vetor.size();++i) std::cout << meu_vetor[i] << ' ' 
+  std::cout << std::endl; 
+
+  std::vector<int> meu_vetor(5,69); // criado o vetor 69,69,69,69,69 
+  v[0] = 5; 
+  v[1] = 3; 
+  v[2] = 7; 
+  v[3] = 4; 
+  v[4] = 8; 
+  return 0; 
+} 
+
+
+~~~~> SET
+
+
+A classe set é para descrever um conjunto ordenado, e sem duplicatas, de elementos. Em principio, devemos passar esta ordem em parâmetro template (mais precisamente, de um functor). Por padrão, o functor std::less (baseado no operador <) é utilizado, o que significa ter um conjunto de elementos ordenados do menor ao maior. Concretamente, basta implementar o operador < de uma classe ou de uma estrutura do tipo T para poder definir um std::set <T>. Além disso, o tipo T deve ter um construtor vazio T(). 
+
+
+Complexidade:
+O(log(n)) para a pesquisa e a inserção. Na verdade, a estrutura std::set se aproveita da ordem para o T para construir uma estrutura de árvore vermelha e preta, permitindo uma busca logarítmica de um elemento.
+
+#include <set> 
+#include <iostream> 
+
+int main(){ 
+  std::set<int> s; // equivale à std::set<int,std::less<int> > 
+  s.insert(2); // s contém 2 
+  s.insert(5); // s contém 2 5 
+  s.insert(2); // a duplicata não foi inserida 
+  s.insert(1); // s contém 1 2 5 
+  std::set<int>::const_iterator 
+    sit (s.begin()), 
+    send(s.end()); 
+  for(;sit!=send;++sit) std::cout << *sit << ' '; 
+  std::cout << std::endl; 
+  return 0; 
+}
+
+
+Atenção: O fato de remover ou adicionar um elemento em uma std:: set torna os seus iteradores inválidos. Não é preciso modificar um std::set em um "loop for" baseado nos seus iteradores. 
+
+
+~~~~> MAP
+
+
+Um "map" (mapa) associa uma chave (identificador) a um dado (tabela associativa). 
+
+O mapa utiliza, pelo menos, dois parâmetros templates:
+O tipo da chave K
+O tipo de dado T
+
+
+Como o std::set, o tipo K deve ser ordnado (esta ordem pode ser dada como 3° parâmetro template, std::less <K> por padrão). O tipo T só exige um construtor vazio. 
+
+Complexidade:
+O (log (n)) para a pesquisa e a inserção. Na verdade, a estrutura std::map aproveita a ordem sobre o T para construir uma estrutura de árvore vermelha e preta, permitindo a busca logarítmica de um elemento.
+
+
+Atenção: o fato de remover ou adicionar um elemento em uma std::map torna os seus iteradores inválidos. Não é preciso modificar um std::map em um "loop for" baseado em seus iteradores 
+
+Atenção: o fato de acessar uma chave através do operador [ ] insere esta chave (com o dado T()) no mapa. Assim, o operador [ ] não é adequado para verificar se uma chave está presente no mapa, é preciso utilizar o método "find". Além disso, ele não garante a constância do mapa (por causa das inserções potenciais) e, portanto, não pode ser usado em const std::map . 
+
+Exemplo:
+#include <map> 
+#include <string> 
+#include <iostream> 
+
+int main(){ 
+  std::map<std::string,unsigned> map_mês_idx; 
+  map_mês_idx["janeiro"] = 1; 
+  map_mê_idx["fevereiro"] = 2; 
+  //... 
+  std::map<std::string,unsigned>::const_iterator 
+    mit (map_mês_idx.begin()), 
+    mend(map_mêis_idx.end()); 
+  for(;mit!=mend;++mit) std::cout << mit->first << '\t' << mit->second << std::endl; 
+  return 0; 
+}
+
+Iterators
+
+Vimos na seção anterior que os iterators permitem percorrer facilmente uma estrutura da STL de um extremo a outro. Um iterator lembra um pouco a noção de ponteiro, mas não é um endereço. Agora, vamos ver quatro iterators clássicos da STL. 
+
+Eles são definidos para todas as classes da STL mencionados acima (exceto, é claro, a std::pair) 
+
+
+
+
+
+
+
+

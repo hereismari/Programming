@@ -1,0 +1,246 @@
+~~~~~~~~ ALGORITMOS ~~~~~~~~
+
+GRAFOS:
+
+----> Modelo matemática que representa relações entre objetos
+----> definido como um conjunto de vértices e um conjunto de arestas que conectam qualquer par de vértices.
+
+> Vértices:
+	. vértices são ditos adjacentes se existir uma aresta os ligando
+	. Grau de um vértice é dado pelo número de arestas que chegam ou partem dele.( caso o grafo seja direcionado os vértices possuem grau de entrada e grau de saída!)
+
+> Laço: vértice de partida é o mesmo que o de chegada, "se conecta a ele mesmo"
+
+> Caminho:
+	.Simples: nenhum dos vértices se repete
+	.Comprimento: número de arestas utilizadas
+
+> Ciclo: Caminho que inicia e termina no mesmo vértice. Um laço é um ciclo de comprimento 1.
+
+> tipo de grafos:
+	
+	. Grafo direcionado(Digrafo): Se uma aresta liga A e B, podemos ir de A para B, mas nao de B para A.
+	. Grafo não direcionado: Se uma aresta liga A e B, podemos ir de A para B, da mesma forma de B para A.
+	
+	.Grafo Trivial: único vértice sem arestas.
+	.Grafo Simples: não direcionado, sem laços e sem arestas paralelas.(pode ter ciclo).
+	.Grafo Completo: grafo simples onde cada vértice se conecta a todos os outros vértices.
+	.Grafo Regular: é um grafo onde todos os vétices possuem o mesmo grau.
+	.Grafo Bipartido: é um grafo cujos vértices podem ser divididos em dois conjuntos. As aretas ligam os vértices que estão em conjuntos diferentes, nunca ligando vértices do mesmo conjunto!!!
+
+	.Grafo Conexo: existe um caminho partindo de um vértice para qualquer outro vértice.
+	.Grafo Desconexo: não existe tal caminho.
+
+	.Grafos isomorfos: grafos aparentamente diferentes porém são iguais
+	.Grafo ponderado: pesos associados às arestas
+	.Grafo hamiltoniano: possui um caminho que visita cada vértice apenas uma vez
+	.Grafo euleriano: possui um ciclo que visita cada aresta apenas uma vez
+	.Grafo semi-euleriano: possui um caminho em vez do ciclo.
+
+---->  FORMAS DE REPRESENTAÇÃO DE UM GRAFO!
+
+> Matriz de Adjacência:
+   .Uma matriz NxN é utilizada para armazenar o grafo, onde N é o número de vértices.
+   .Alto custo computacional O(N^2)
+   .A aresta é representada por uma "marca" na posical (i,j) : aresta liga vértice i ao j.
+   .Se tiver muito 0 deixa pra la --> lista de adjacência
+> Lista de Adjacência:
+   .Lista de listas
+
+----> BUSCA EM GRAFOS:
+
+	>Busca em profundidade.
+		 - Partindo de um vértice inicial, ela explora o máximo possível cada um dos seus ramos antes de retroceder.("backtracking")
+		- Util para: encontrar componentes conectados, ordenação topológica, problemas do tipo Labirinto.
+
+	>Busca em largura.
+		- Partindo de um vértice inicial, ela explora todos os vértices vizinhos. Em seguida, para cada vértice vizinho, ela repete o processo, visitando vértices ainda enexplorados.
+		-Util para: achar componentes conectados, achar todos os vertices conectados a apenas um componente, achar o MENOR CAMINHO entre dois vértices, testar bipartição em grafos.
+	>Busca pelo menor caminho. 
+		- Partindo de um vértice inicial, calcula a menor distância desse vértice a todos os demais (desde que exista um caminho entre eles)
+		* Algoritmo Dijkstra (resolve para grafos dirigidos ou não dirigidos, e com pesos não negativos)
+
+BACKTRACKING:
+
+> Você tem um número de opções possíveis, e você deve escolher uma. Depois de fazer sua escolha você irá ter novas opções; porém cada as novas opções depedentem da escolha feita anteriormente. Esse processo é repetido até você chegar ao estado final.
+
+> Uma maneira de armazenar as folhas que já foram testadas é: Entrar no nó, fazer uma lista com todos os seus filhos. Quando você testar cada filho, tire-o(ou marque-o) da lista. Quando a lista esta vazia não tem mais filhos para visitar e você pode retornar "failure". 
+Um modo mais fácil de armazenar os filhos que já foram testados é se você pode definir uma ordem de filhos. Se há uma ordem, e você sabe qual filho vc acabou de testar, você pode determinar qual filho testar em seguida.
+
+Exemplo de um problema de Backtracking:
+The problem of four-coloring a map. É um teorema matemático que diz que qualquer mapa no plano, não importa qual seja, pode ser colorido com no máximo 4 cores, de modo que dois países que tenham fronteira possuam cores diferentes.
+
+Para colorir o mapa, você irá escolher uma cor para o primeiro país, depois uma cor para o segundo país e assim por diante, até que todos os países estejam coloridos. Há dois modos de se fazer isso:
+
+Método 1. Tentar cada uma das 4 cores possíveis, e sar recursão. Quando você ficar sem países, checar se você está em um "goal node".
+Método 2. Tentar apenas as cores que não foram utilizadas pelos países adjacentes, e usar recursão. Se e quando você ficar sem países, você coloriu o mapa com sucesso!
+
+> O método 2 é beeeeeeem mais eficiente! "Se há qualquer meio de eliminar filhos(possíveis futuras escolhas), faça isso!!!!!!"
+
+
+> The minimax strategy: Tem como objetivo achar a o movimento que gera a pior condição para o jogador.
+
+
+
+
+The backtracking algorithm.
+
+
+Exemplos de pseudocódigo:
+If you are already at a solution, report success.
+for (every possible choice in the current position ) {
+ Make that choice and take one step along the path.
+ Use recursion to solve the problem from the new position.
+ If the recursive call succeeds, report the success to the next higher level.
+ Back out of the current choice to restore the state at the beginning of the loop.
+}
+Report failure
+
+boolean solve(Node n) {
+    if n is a leaf node {
+        if the leaf is a goal node, return true
+        else return false
+    } else {
+        for each child c of n {
+            if solve(c) succeeds, return true
+        }
+        return false
+    }
+}
+
+
+SORT:
+
+	> se estiver em ordem crescente: ISERTION
+. Menos de 20 elementos; Muitos elementos poucas alterações.
+
+
+/* a[0] to a[n-1] is the array to sort */
+int i,j;
+int iMin;
+ 
+/* advance the position through the entire array */
+/*   (could do j < n-1 because single element is also min element) */
+for (j = 0; j < n-1; j++) {
+    /* find the min element in the unsorted a[j .. n-1] */
+ 
+    /* assume the min is the first element */
+    iMin = j;
+    /* test against elements after j to find the smallest */
+    for ( i = j+1; i < n; i++) {
+        /* if this element is less, then it is the new minimum */  
+        if (a[i] < a[iMin]) {
+            /* found new minimum; remember its index */
+            iMin = i;
+        }
+    }
+ 
+    if(iMin != j) {
+        swap(a[j], a[iMin]);
+    }
+ 
+}
+
+	> senao, QUICKSORT --- qsort(lista,ate qual elemento,sizeof(variavel da lista),funcao de comparacao)
+
+int funcao de comparacao(const void *p1, const void *p2)
+{
+	if( *(int*)p1 == *(int*)p2)
+		return 0;
+	else if (*(int*)p1 < *(int*)p2)
+		return 1;
+	else
+		return -1;
+}
+int funcao de comparacao mais simples(const void *p1,const void *p2)
+{
+	return *(int *)p2 - *(int *)p1; 
+} 
+
+Exemplos quicksort:
+
+struct Compet
+{
+  char nome[16];
+  int pontos;
+} compet[1010];
+
+int n;
+
+int compara(const void * p1, const void * p2)
+{
+  int r = ((struct Compet *)p2)->pontos - ((struct Compet *)p1)->pontos;
+  if (r != 0)
+    return r;
+  return strcmp(((struct Compet *)p1)->nome, ((struct Compet *)p2)->nome);
+}
+-------------------------------------------
+int compare (const void * a, const void * b)
+{
+  return ( *(int*)a - *(int*)b );
+}
+
+~~~~> zerar uma lista: memset(lista, 0, sizeof(lista));
+
+DICAS:
+
+o Sort do C++ para ordenar structs ordena de acordo com o primeiro elemento e depois com o segundo elemento;
+
+
+ALGORITMOS IMPORTANTES:
+
+maior soma de uma lista de tamanho qualquer:
+
+int maior_soma = -1;
+int cont;
+int inicio;
+int fim;
+		lista = [1,2,3,-7,4,5,-1,2]
+	for(i=0;i<TAMANHO_DA_LISTA;i++){
+		cont += lista[i]
+		
+		if (cont > 0)
+			inicio = i;		
+
+		if(cont > maior_soma)
+			maior_soma = cont;
+			fim = i;
+		if(cont < 0){
+			
+			cont = 0;
+		}
+	
+	}
+
+Desenvolvendo um DPA(dynamic programming algorithm):
+
+1 - Formular uma recorrência(solução ótima como uma função para os subproblemas) baseada em uma solução ótima.
+
+
+0/1 Knacksap problem:
+
+"Greedy" algorithm
+
+1 - choose "best" items that will fit. "best" : max value, min weight;
+
+2 - repeat until is full;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

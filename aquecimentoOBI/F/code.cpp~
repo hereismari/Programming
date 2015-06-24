@@ -1,0 +1,70 @@
+#include <bits/stdc++.h>
+#define MAX 5010
+#define IN 100
+#define OUT 101
+#define ESPECIAL 102
+#define INF 10000
+
+using namespace std;
+vector<int> adj[MAX];
+
+int bfs(int x, int lookin){
+
+	int i = 0;
+	queue<int> q;
+	int dist[MAX];
+	bool visitado[MAX];
+
+	for(int i = 0 ; i < MAX; i++) {dist[i] = INF; visitado[i] = false;}
+
+	dist[x] = 0;
+	q.push(x);
+	visitado[x] = true;
+
+	while(!q.empty()){
+		int top = q.front(); q.pop();
+		if(top == lookin) return dist[lookin];
+		for(int i = 0; i < adj[top].size(); i++){
+			if(!visitado[adj[top][i]]){
+				dist[adj[top][i]] = dist[top] + 1;
+				q.push(adj[top][i]);
+				visitado[adj[top][i]] = true;
+			}
+		}
+	}
+}
+
+int main(){
+
+	int n,m;
+	char s1[20],s2[20];
+
+	scanf("%d %d",&n,&m);
+	for(int i = 0 ; i < m; i++){
+
+		scanf("\n%s %s",s1,s2);
+		int a1, a2;
+
+		if(strcmp(s1,"Entrada") == 0) a1 = IN;
+		else if(strcmp(s1,"Saida") == 0) a1 = OUT;
+		else if( strcmp(s1,"*") == 0) a1 = ESPECIAL;
+		else a1 = s1[0] - 'A';
+	
+		if(strcmp(s2,"Saida") == 0) a2 = OUT;
+		else if(strcmp(s2,"Entrada") == 0) a2 = IN;
+		else if(strcmp(s2,"*") == 0) a2 = ESPECIAL;
+		else a2 = s2[0] - 'A';
+		
+		adj[a1].push_back(a2);
+		adj[a2].push_back(a1);
+
+	}
+
+	int answer = 0;
+
+	answer += bfs(IN,ESPECIAL);
+	answer += bfs(ESPECIAL,OUT);
+
+	printf("%d\n",answer);
+	return 0;
+}

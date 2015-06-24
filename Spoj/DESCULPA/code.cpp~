@@ -1,0 +1,51 @@
+#include <stdio.h>
+#define MAX 1000
+
+using namespace std;
+
+int m[MAX][MAX] = {0};
+int v[MAX];
+int w[MAX];
+int r[MAX];
+
+int knap(int index, int weight, int x){
+
+	int taked = 0;
+	int not_taked = 0;
+
+	if(m[index][weight] !=  0 && r[index] == x) return m[index][weight];
+
+	if(index == 0){
+		if(w[index] <= weight){ 
+			m[index][weight] = v[index]; 
+			r[index] = x;
+			return m[index][weight];}
+		else {m[index][weight] = 0; r[index] = x ;return m[index][weight];}
+	}
+
+	if(w[index] <= weight)
+		taked = knap(index-1,weight - w[index],x) + v[index];
+	not_taked = knap(index-1,weight,x);
+	
+	r[index] = x;
+	if(taked >= not_taked) {m[index][weight]= taked; return taked;}
+	else { m[index][weight] = not_taked; return not_taked;}
+
+}
+
+int weight,n;
+int x,y;
+
+int main(){
+	int cont = 1;	
+	while(1){
+		scanf("%d %d",&weight,&n);
+		if(weight == 0 && n ==0) break;
+		for(int i = 0 ; i < n ; i++)
+			scanf("%d %d",&w[i],&v[i]);
+		printf("Test %d\n",cont++);
+		printf("%d\n",knap(n-1,weight,cont));
+	}
+
+
+}

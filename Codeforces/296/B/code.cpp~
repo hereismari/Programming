@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <iostream>
+#include <string.h>
+#include <algorithm>
+#include <vector>
+#include <utility>
+#include <map>
+#define ERRO 97
+#define MAX 200001
+using namespace std;
+
+int n;
+int l,k;
+int cont;
+
+map < char, vector<int> > e1;
+map < char, vector<int> > e2;
+map <char, int> marked;
+map < pair<int, int> , int > saida;
+int pos[MAX];
+
+string s1;
+string s2;
+
+int maior;
+
+int main(){
+	
+	scanf("%d",&n);
+	cin >> s1;
+	cin >> s2;
+	cont = 0;
+	memset(pos,0,sizeof(pos));
+	for(int i = 0; i < n ;i++){
+		if(s1[i] != s2[i]){
+			cont++;
+			marked[s1[i]] = 1;
+			marked[s2[i]] = 1;
+			e1[s1[i]].push_back(i+1);
+			e2[s2[i]].push_back(i+1);
+		}
+
+		e1[s1[i]].push_back(i+1);
+		e2[s2[i]].push_back(i+1);
+	}
+	for(std::map<char,int>::iterator it=marked.begin(); it!=marked.end(); ++it)	
+	{
+		if(e1.count(it->first) != 0 && e2.count(it->first)!= 0){
+			for(int i = 0; i < e1[it->first].size();i++)
+				for(int j=0;j< e2[it->first].size();j++)
+					saida[make_pair(e1[it->first][i],e2[it->first][j])]++;
+
+		} 
+	}
+maior = 0;
+l = k = 0;
+	for(std:;map< pair<int,int>, int>::iterator it=saida.begin(); it!=saida.end(); it++){
+		if(it->second > maior){
+		maior = it->second;
+		l = (it->first).first;
+		k = (it->first).second;
+	}
+	
+}
+	printf("%d\n%d %d\n",cont - maior,l,k);
+	return 0;
+}
