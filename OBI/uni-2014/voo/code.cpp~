@@ -52,10 +52,10 @@ int main(){
 		d2 += (24*60);
 	}
 		
-	int fuso = (d1-d2)/2;
+	int fuso = (d1-d2)/60;
 	int tempo = (d1 - fuso);
 	
-	printf("%d %d\n", tempo, fuso/60);
+	printf("%d %d\n", tempo, fuso/2);
 
 	return 0;
 }

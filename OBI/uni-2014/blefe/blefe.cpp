@@ -60,20 +60,18 @@ int main(){
 		scanf("%d",&B[i]);
 
 	for(int i = 0 ; i < m ; i++){		
-	if(busca_binaria(B[i]) == -1 && busca_especial(B[i],i) == -1 && !done){
+		if(busca_binaria(B[i]) == -1 && busca_especial(B[i],i) == -1 && !done){
 			answer = B[i];
 			done = true;
 			break;
-	}
-	//selectionSort	
-	for(int j = i -1; j >= 0; j--)
-		if(B[j] > B[j+1])
-		{
-			int aux = B[j];
-			B[j] = B[j+1];
-			B[j+1] = aux;
 		}
-
+	//selectionSort	
+		for(int j = i -1; j >= 0; j--)
+			if(B[j] > B[j+1]) {
+				int aux = B[j];
+				B[j] = B[j+1];
+				B[j+1] = aux;
+			}
 	}
 
 	if (!done)
