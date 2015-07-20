@@ -1,1 +1,1 @@
-Easy, classic way to walk a in graph.
+Easy, classic way to walk in a graph.
