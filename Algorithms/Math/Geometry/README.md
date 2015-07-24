@@ -28,4 +28,6 @@ Produto Vetorial:
   4) Distributiva
   5) implementação: aquela história da matriz... i j k, para apenas 2 dimensoes:
       Sendo u = (x1,y1) e v = (x2,y2), temos u x v = x1*y2 - y1*x2
+  6) Módulo do produto vetorial : área do paralelogramo formado pelos vetores.
+  
   
