@@ -1,19 +1,16 @@
-s = raw_input()
-n = int(s)
+n = int(raw_input())
 
-answer = 10 + len(s) - 1
-i = 10
-k = 2
-while i <= 1000000000 and n >= 10:
+i = 1
+cont = 1
+answer = 0
+while n/i >= 10:
+	 answer += 9*i*cont
+	 i *= 10
+	 cont += 1
 
-	if(n >= i):
-		answer += (n-i) * k
-		break
-	else:
-		answer += k*(i+1)	
-	i *= 10
-	k += 1
-	
+answer += (n-i + 1)*(cont)
+if n >= 10:
+	print answer
+else:
+	print n
 
-if n <= 10: print n
-else: print answer

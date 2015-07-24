@@ -13,7 +13,9 @@ string entrada;
 vector<char> saida;
 int x,y,k;
 int maior,cont;
+
 int main() {
+
     while(1){
         scanf("%d %d",&n,&d);
 		        
@@ -23,13 +25,14 @@ int main() {
 		cont = 0;
         cin >> entrada;
         saida.clear();
+
 		for(int i = 0 ; i < n; i++){
 			if(saida.empty())
 				saida.push_back(entrada[i]);
-			else{
+			else {
 				x = saida.back();
 				y = entrada[i];
-				k = n -(i+1);
+				k = n - (i+1);
 				cont = 0;
 				if (x < y){
 					while(x < y && !saida.empty() && cont <= k && !(saida.size() < (n-d) && k < (n-d) - saida.size())){
@@ -39,13 +42,10 @@ int main() {
 					}
 					saida.push_back(y);
 				}
-				else if(saida.size() < n-d)saida.push_back(entrada[i]);	
+				else if(saida.size() < n-d) saida.push_back(entrada[i]);	
 			}
-		for(int j = 0 ; j < saida.size(); j++)
-			printf("%c",saida[j]);
-		printf("\n");
-		
 		}
+		
 		for(int i = 0 ; i < saida.size(); i++)
 			printf("%c",saida[i]);
 		printf("\n");
