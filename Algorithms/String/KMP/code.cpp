@@ -12,56 +12,68 @@
  
 using namespace std; 
 
-int reset[MAX];
-void preprocess(char t[]){
+/*
+ * C++ Program to Implement Knuth–Morris–Pratt Algorithm (KMP)
+ */
+#include <iostream>
+#include <cstring>
+using namespace std;
 
-	int j = -1;
-	memset(reset,0, sizeof reset);
-	reset[0] = -1;
-
-    for (int i = 1; i < strlen(t); i++) {
-
-        j = reset[i - 1];
-        while (j >= 0) {
-            if (t[j] == t[i - 1])
+void preKMP(string pattern, int f[])
+{
+    int m = pattern.length(), k;
+    f[0] = -1;
+    for (int i = 1; i <= m; i++)
+    {
+        k = f[i - 1];
+        while (k >= 0)
+        {
+            if (pattern[k] == pattern[i - 1])
                 break;
             else
-                j = reset[j];
+                k = f[k];
         }
-        reset[i] = j + 1;
-	}
-
-//	for(int i = 0; i < strlen(t); i++)
-//		printf("%d ",reset[i]); 
+        f[i] = k + 1;
+    }
 }
-
-int main() {
  
-	int n;
-	char c;
-	while(scanf("\n%d\n",&n) != EOF){
-		char t[n];
-		scanf("%s\n",t);
-		preprocess(t);
-		int i = 0, j = 0; bool flag = true;
-		while ((c = getchar()) != '\n'){
-		//	printf("%c",c);
-			while(true) {
-				if(j == -1){
-					j = 0; break;
-				}
-				else if(c == t[j]){
-					j++;
-					if(j == n) {j = reset[n]; printf("%d\n",i-n);}
-					break;
-				}
-				else
-					j = reset[j];
-			}
-			i++;
-		}
-		printf("\n");
-	}
+void kmp(string pattern, string target ,int f[]) {
 
-	return 0; 
+    int m = pattern.length();
+    int n = target.length();
+    preKMP(pattern, f);     
+    int i = 0;
+    int j = 0;        
+    while (i < n)
+    {
+        if (j == -1)
+        {
+            i++;
+            j = 0;
+        }
+        else if (target[i] == pattern[j])
+        {
+            i++;
+            j++;
+            if (j == m) { printf("%d\n",i-m); j = f[j];}
+        }
+        else
+            j = f[j];
+    }
+}
+ 
+int main(){
+
+    int length;
+    scanf("%d", &length);
+    while(1){
+        int r[length+1];
+		string text, pattern;
+        cin >> pattern >> text;
+        kmp(pattern, text, r);
+        if(scanf("%d",&length) == 1) cout << endl;
+        else break;
+    }
+
+    return 0;
 }

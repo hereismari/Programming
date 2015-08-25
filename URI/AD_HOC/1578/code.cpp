@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#define ll long long int
+#define ll unsigned long long
 #define MAX 110
 
 using namespace std;
@@ -24,7 +24,7 @@ int main() {
 		scanf("%d",&n);
 		for(int i = 0 ; i < n; i++){
 			for(int j = 0; j < n; j++){
-				scanf("%lld",&m[i][j]);
+				cin >> m[i][j];
 				m[i][j] *= m[i][j];	
 				if(((int) log10(m[i][j]) + 1) > space[j])
 				{
@@ -42,6 +42,7 @@ int main() {
 			}	
 			printf("\n");
 		}
+		if(t != 1) printf("\n");
 		t--;
 	}
 

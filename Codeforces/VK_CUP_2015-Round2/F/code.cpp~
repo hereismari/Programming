@@ -1,0 +1,84 @@
+#include <bits/stdc++.h> 
+
+#define MAX 100010 
+#define MOD 1000000007
+#define BASE 5
+#define ll long long int
+#define F first
+#define S second 
+#define pb push_back
+#define mp make_pair 
+#define pii pair<int,int> 
+#define vi vector<int> 
+#define vpii vector<pair<int,int> >
+#define ALPHA 30
+
+using namespace std; 
+
+int n,m;
+ll h1[ALPHA][MAX], h2[ALPHA][MAX];
+ll dist[MAX], aux[MAX];
+
+void preHash() {
+	aux[0] = 1;
+    for(int i = 1; i < MAX; i++) aux[i] = (aux[i-1] * BASE) % MOD;
+}
+
+bool test(int index, int i, int j){
+	return h2[i][m] != h1[j][index + m] - h1[j][index] * aux[m];
+}
+
+ll buildHash(string s, ll h[ALPHA][MAX]){
+    
+	int l = s.length();
+	for(int c = 0; c < ALPHA; c++){
+		int j = c - 'a';
+		for(int i = 0; i < l; i++) 
+			h[j][i+1] = (h[j][i] * BASE + (s[i]  == c)) % MOD;
+	}    
+}
+
+bool verify(int index, string s1){
+
+	bool flag = true;	
+	int d[ALPHA]; memset(d, -1, sizeof d);
+
+	for(int i = 0; i < ALPHA; i++){
+			
+		if(dist[i] == -1) continue;
+		int k = s1[dist[i] + index] - 'a';
+		if(d[i] != -1 && d[i] != k) { flag = false; break;}
+		if(d[k] != -1 && d[k] != i) { flag = false; break;}
+		d[i] = k; d[k] = i;
+		if(test(index,i,k)){ flag = false; break;}
+	}
+	return flag;
+}
+
+int main() {
+ 
+	scanf("%d %d",&n,&m);
+	string s1,s2;
+	int dist1[MAX], dist2[MAX];
+	set<int> st;
+
+	cin >> s1 >> s2;
+
+	buildHash(s1,h1);
+	buildHash(s2,h2);
+
+	memset(dist, -1, sizeof dist);
+	for(int i = 0; i < m; i++)
+		if(dist[s2[i]-'a'] == -1)
+			dist[s2[i] - 'a'] = i;
+
+	for(int i = 0; i <= n-m; i++){
+		if(verify(i,s1)) st.insert(i+1);
+	}
+
+	printf("%d\n",st.size());
+	for(set<int>::iterator it = st.begin(); it != st.end(); it++){
+		printf("%d ",*it);
+	}
+	return 0; 
+}

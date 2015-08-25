@@ -1,0 +1,10 @@
+x = int(raw_input())
+while x > 0:
+    try:
+        n,m = raw_input().split()
+    except:
+        break
+    if len(m) > len(n): print 'nao encaixa'
+    elif n[len(n)-len(m):] == m: print 'encaixa'
+    else: print 'nao encaixa'
+    x -= 1

@@ -13,17 +13,17 @@ int time1;
 bool flag;
 
 bool dfs(int x){
- 
-	time1 += 1; 
-	color[x] = GRAY;
-    
+
+    time1 += 1;
+    color[x] = GRAY;
+
     for(int i = 0; i < adj[x].size(); i++){
         if(color[adj[x][i]] == GRAY) flag = true;
         else if(color[adj[x][i]] == WHITE) dfs(adj[x][i]);
     }
-	color[x] = BLACK;
-} 
- 
+    color[x] = BLACK;
+}
+
 int main() {
  
     int n;

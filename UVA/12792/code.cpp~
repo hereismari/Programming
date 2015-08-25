@@ -1,0 +1,81 @@
+#include <bits/stdc++.h>
+#define MAX 300001
+
+#define ll long long int
+using namespace std;
+
+int n;
+ll a[MAX];
+bool visited[MAX];
+set<ll> st;
+
+void permutationSorting() {
+
+    st.clear();
+    memset(visited, false, sizeof visited);
+
+    for(int i = 1; i <= n; i++){
+        if(!visited[i] && i != a[i]){
+            int cont = 0;
+            int aux = a[i];
+            visited[i] = true;
+            while(aux != i){
+                cont++; visited[aux] = true; aux = a[aux];
+            }
+            st.insert(cont);
+        }
+    }
+}
+
+ll gcd(ll a, ll b){
+    return b == 0 ? a : gcd(b, a % b);
+}
+
+ll lcm(ll a, ll b){
+    return (a * (b/gcd(a,b)));
+}
+
+int bruteforce() {
+    bool done = false;
+    int b[MAX], cont = 0;
+    while(!done){
+        cont++;
+        for(int i = 1,j=1; i <= n/2; i+=1,j+=2){
+            b[j] = a[n/2+i];
+            b[j+1] = a[i];
+        }
+        bool flag = true;
+        for(int i = 1; i <= n; i++){
+//            printf("%d ",b[i]);
+            a[i] = b[i];
+            if(a[i] != i) flag = false;
+        }
+        done = flag;
+    }
+
+    return cont;
+}
+
+int main() {
+
+    while(scanf("%d",&n) != EOF) {
+
+            printf("oi");
+        for(ll i = 1; i <= n; i++) {
+            printf("oi");
+            if(i % 2 == 0) a[i] = (i-1)/2;
+            else a[i] = (i-1)/2 + n/2;
+            printf("%lld ",a[i]);
+        }
+
+        permutationSorting();
+        ll ans = 1;
+        for(set<ll>:: iterator it = st.begin(); it != st.end(); it++)
+            ans = lcm(ans,*it);
+
+//        printf("%d\n",bruteforce() + 1);
+        printf("%lld\n",ans + 1);
+    }
+
+    return 0;
+}

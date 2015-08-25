@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+#define MAX 10000010
+
+using namespace std;
+
+struct aux{
+	int begin, int end, int count;
+	aux(int begin=INT_MAX, int end=0, int count=0){
+		this->begin = begin;
+		this->end = end;
+		this->count = count;
+	}
+	void setBegin(int b){
+		begin = min(begin,b);
+	}
+	void setEnd(int e) {
+		end = max(end,e);
+	}	
+};
+
+bool comp(aux a, aux b){
+	if(a.count != b.count) return a.count > b.count;
+	return abs(a.end - a.begin) < abs(b.end - b.begin);
+}
+
+aux x[MAX];
+int n,a;
+
+int main() {
+
+	scanf("%d",&n);
+	for(int i = 0; i < n; i++){
+		scanf("%d",&a);
+		x[a].setBegin(i);
+		x[a].setEnd(i);
+		x[a].count++;
+	}
+
+	sort(x,x+MAX,comp);
+	printf("%d\n",x[0]);	
+
+
+}

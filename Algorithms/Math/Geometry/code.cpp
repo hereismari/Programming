@@ -19,6 +19,8 @@ struct P {
 	int operator * (const P & a) const { return x*a.y - y*a.x;}
 	P operator - (const P & a) const { return P(x-a.x, y - a.y);}
 	bool operator < (const P & a) const { return (*this)*a < 0; }
+	int ccw(P a, P b) { return (a - (*this)) * (b - (*this)); }
+	// if ccw > 0, left turn. else right turn(this->A->b)
 };
 
 P p[MAX];

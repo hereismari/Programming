@@ -1,31 +1,33 @@
-#include <bits/stdc++.h>
-#define MAX 100000100
-#define ll long long int
+nclude <bits/stdc++.h>
+#define MAX 5000010
 
 using namespace std;
 
-ll answer[MAX];
+int t,a,b;
+int ans[MAX];
 
-ll primes(){
-
-	for(int 2 = 0
-
-
+void pre(){
+    
+    memset(ans,0,sizeof(ans));
+    
+    for(int i = 2; i < MAX;i++){
+        if(!ans[i])
+            for(int j=1;i*j<MAX;j++){
+                for(int k=i*j;k%i==0;k/=i){
+                      ans[i*j]++;
+            }
+        }
+        ans[i]+=ans[i-1];
+    }
 }
 
-
-int main(){
-
-	int n;
-	int a,b;
-	scanf("%d",&n);
-
-	primes();
-	for(int i = 0  ; i < n ; i++){
-
-		scanf("%d %d",&a,&b);
-		printf("%lld\n",answer[a] - answer[b]);
-	}
-
-	return 0;
+int main()
+{
+    pre();
+    scanf("%d",&t);
+    while(t--){
+        scanf("%d%d",&a,&b);
+        printf("%d\n",ans[a]-ans[b]);
+    }
+    return 0;
 }
