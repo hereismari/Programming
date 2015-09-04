@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+#define MAX 300
+
+using namespace std;
+
+bool used[MAX], adj[MAX][MAX];
+int ans, n, x;
+int use, teste;
+
+void solve(int x) {
+        ans = max(ans,use);
+        for(int k = x; k < n; k++){
+            if(!used[k]) {
+
+                use++;
+                used[k] = true;
+                for(int i = k+1; i < n; i++)
+                    if(!adj[k][i]) used[i] = true;
+
+                solve(k);
+
+                use--;
+                for(int i = k+1; i < n; i++)
+                    if(!adj[k][i]) used[i] = false;
+                used[k] = false;
+
+            }
+        }
+}
+
+
+int main() {
+    teste = 1;
+    while(true) {
+
+        memset(used, false, sizeof used);
+        memset(adj, true, sizeof adj);
+
+        scanf("%d",&n);
+        if(n == 0) break;
+        for(int i = 0; i < n; i++) {
+            scanf("%d",&x);
+            while(x != 0) {
+                adj[i][x-1] = adj[x-1][i] = false;
+                scanf("%d",&x);
+            }
+        }
+
+        use = ans = 0;
+        solve(0);
+        printf("Teste %d\n%d\n\n", teste++, ans);
+    }
+
+    return 0;
+
+}

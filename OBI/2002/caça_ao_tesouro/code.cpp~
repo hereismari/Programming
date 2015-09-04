@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+#define MAX 1000050
+
+using namespace std;
+
+int n, x, y, a[MAX];
+int dp[MAX];
+
+void iterativeDP(int k) {
+     for(int j = n-1; j >= 0; j--)
+	for(int i = k; i >= 1; i--)
+           if(i - a[j] >= 0 && dp[i - a[j]]) dp[i] = true;
+}
+
+int main() {
+
+    int teste = 1;
+    while(true) {
+
+        scanf("%d %d %d",&x,&y,&n);
+	if(x == 0 ) break;
+        memset(dp, false, sizeof dp);
+        dp[0] = true;
+
+        if(x == 0 && y == 0 && n == 0) break;
+        int sum = 0;
+        for(int i = 0; i < n; i++) {scanf("%d",&a[i]); sum += a[i]; }
+        
+        sum = (sum + x + y);
+        int value = sum/2 - x;
+        iterativeDP(value);
+        printf("Teste %d\n",teste++);
+        printf("%c\n\n",(sum % 2 == 0 && dp[value]) ? 'S': 'N');
+    }
+
+    return 0;
+}
