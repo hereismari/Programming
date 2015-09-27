@@ -42,7 +42,7 @@ int main() {
 			}	
 			printf("\n");
 		}
-		if(t != 1) printf("\n");
+		printf("\n");
 		t--;
 	}
 
