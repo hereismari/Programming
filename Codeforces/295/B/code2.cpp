@@ -12,10 +12,8 @@ int answer(int x) {
 	int cont = 0;
 
 	while(x > n){
-		if ( x % 2 == 0)
-			x = x/2;
-		else
-			x += 1;
+		if(x % 2 == 0) x = x/2;
+		else x += 1;
 		cont++;
 	}
 
