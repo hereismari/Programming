@@ -22,10 +22,10 @@ Cross product:
   1) The vector w is normal to both v and u (and the plain that contains them)
   2) The absolute value of w can tell us the relative position of these vectors (clockwise if > 0)
   3) The absolut value of w is also the is equal to the area of the parallelogram with two of its sides formed by A and B. Furthermore, the triangle formed by A, B and the red line in the diagram has half of the area of the parallelogram, so we can calculate its area from the cross product also.
-  4) u x v = 0, if, and only if, one of them is null or θ = 90
+  4) u x v = 0, if, and only if, one of them is null or θ = 0 
   2) u x v = - (v x u)
   3) mv x nu = (mn) (v x u), if  m and  n are real numbers
   4) Distributive
-  5) u = (x1,y1) e v = (x2,y2), u x v = x1*y2 - y1*x2
+  5) u = (x1,y1) and v = (x2,y2), u x v = x1*y2 - y1*x2
   
   

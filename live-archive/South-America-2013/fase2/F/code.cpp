@@ -20,7 +20,6 @@ int main() {
         sort(a,a+n,comp);
         int ans = 0;
         for(int i = 0; i < n; i++){
-//            printf("%d %d\n",a[i].F,a[i].S);
             if(a[i].F > a[i].S) ans += 3;
             else if(a[i].S - a[i].F + 1 <= g){ g -= a[i].S - a[i].F + 1; ans += 3;}
             else if(a[i].S - a[i].F <= g){ g -= a[i].S - a[i].F; ans += 1;}
@@ -32,3 +31,4 @@ int main() {
 
     return 0;
 }
+

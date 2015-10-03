@@ -1,0 +1,13 @@
+s = raw_input()
+n = len(s)
+ans = 0
+m = {}
+
+for i in range(n):
+	tmp = 0;
+	for j in m.keys():
+		tmp = (tab[j] if (j <= s[i] and tab[j] > tmp) else tmp)
+	tab[s[i]] = tmp + 1
+	ans = max(ans,tab[s[i]])
+
+print ans
