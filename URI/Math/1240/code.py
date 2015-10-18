@@ -4,7 +4,10 @@ while x > 0:
         n,m = raw_input().split()
     except:
         break
-    if len(m) > len(n): print 'nao encaixa'
-    elif n[len(n)-len(m):] == m: print 'encaixa'
+    
+    l_n = len(n)
+    l_m = len(m)
+    if l_m > l_n: print 'nao encaixa'
+    elif n[l_n-l_m:] == m: print 'encaixa'
     else: print 'nao encaixa'
     x -= 1
