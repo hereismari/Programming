@@ -18,29 +18,30 @@ int n, m, x, y;
 
 int main() {
  
-    while(scanf("%d %d", &n, &m) != EOF){
+    while(scanf("%d %d", &n, &m) != EOF) {
 
-        if(2*n + 2 < m || n-m >= 2) {puts("-1"); return 0;}
-        int cont1 = 0, cont0 = 0;
+        if(m > 2*n + 2 || n > 1 + m) { puts("-1"); return 0; }
+
+        while(m > n + 1 && n >= 1) { printf("110"); m -= 2; n -= 1; }
         
-        while(m > n + 1 && n >= 1) { printf("110"); m-=2; n-=1;}
-        
-        int all = n + m;
         if(n == 0 && m <= 2) for(int i = 0; i < m; i++) printf("1");
+        
         else if(m > n) {
-            for(int i = 0; n > 0 && m > 0; i++) {
+            
+            for(int i = 0; n > 0; i++) {
                 if(i % 2 == 0) { printf("1"); m -= 1; }
                 else { printf("0"); n -= 1; }
             }
+            
             if(m > 0) for(int i = 0; i < m; i++) printf("1");
         }
         else {
-            for(int i = 0; n > 0 && m > 0; i++) {
+            for(int i = 0; m > 0; i++) {
                 if(i % 2 == 1) { printf("1"); m -= 1; }
                 else { printf("0"); n -= 1; }
             }
+
             if(n > 0) for(int i = 0; i < n; i++) printf("0");
-            if(m > 0) for(int i = 0; i < m; i++) printf("1");
         }
     }
 

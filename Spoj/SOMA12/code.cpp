@@ -7,21 +7,6 @@ using namespace std;
 ll a[MAX];
 int n;
 
-bool binSearch(ll x) {
-	
-	int i = 0;
-	int j = n-1;
-	int m = j/2;
-	while(i < j){
-		if(a[m] == x) return true;
-		else if(a[m] < x) i = m+1;
-		else j = m;
-		m = (i+j)/2;
-	}
-
-	return false;
-}
-
 int main() {
 
 	scanf("%d",&n);
@@ -29,12 +14,15 @@ int main() {
 	ll k;
 	scanf("%lld",&k);
 
-	for(int i = 0; i < n; i++){
-		if(k - a[i] >= 0)
-			if(binSearch(k-a[i])){
-				printf("%lld %lld\n",a[i],k-a[i]); return 0;
-			}
+    sort(a, a + n);
+    int ans1, ans2;
+	for(int i = 0, j = n-1; i < j;){
+		if(a[i] + a[j] > k) j--;
+        else if(a[i] + a[j] < k) i++;
+        else { ans1 = a[i]; ans2 = a[j]; break; }
 	}
+
+    printf("%d %d\n", ans1, ans2);
 
 	return 0;
 }

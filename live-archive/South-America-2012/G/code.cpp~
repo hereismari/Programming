@@ -1,0 +1,81 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define MAX 5001
+   
+vector<int> adj[MAX + 1];
+int matched[MAX];
+bool visited[MAX];
+
+int dir_x[4] = {-1, 1, 0, 0};
+int dir_y[4] = {0, 0, -1, 1};
+
+int n,m;  
+
+bool augment_path(int id) {
+ 
+  visited[id] = true;
+ 
+  for(int i = 0; i < graph[id].size(); i++) {
+    int neigh = graph[id][i];
+    if(visited[neigh]) continue;
+ 
+    if(matched[neigh] == UNMATCHED) {
+        matched[id] = neigh; matched[neigh] = id;
+        return true;
+    } 
+    else if(matched[neigh] != id) {
+        visited[neigh] = true;
+        if (augment_path(matched[neigh])) {
+            matched[id] = neigh; matched[neigh] = id;
+            return true;
+        }
+    }
+  }
+ 
+  return false;
+}
+   
+int main() {
+     
+    while(scanf("%d %d", &n, &m) != EOF) {
+        
+		memset(matched, false, sizeof matched);
+		memset(used, false, sizeof used);
+		for(int k = 0; k < MAX; k++)
+        	if(adj[k].size()!=0)
+            	adj[k].clear();
+
+        for(int i = 0; i < n; i++) scanf("%s", g[i]);
+         
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < m; j++) {
+                if(g[i][j] == 'X') continue;
+                if(visited[i][j]) continue;
+
+				for(int k = 0; k < 4; k++) {
+					int x = i + dir_x[k];
+					int y = j + dir_y[k];
+
+					if(x >= 0 && x < c && y >= 0 && y < r) {
+						adj[i*m + j].pb(x*m + j);
+						used[i*m +j] = used[x*m +j] = true;				
+					}				
+				}
+            }
+       
+		int answer = 0;
+ 		for(int i = 0; i < MAX; i++) {
+    		if(matched[i] == UNMATCHED && used[i] == true) {
+      			fill(visited, visited + MAX, false);
+      			if(augment_path(i)) answer++;
+    		}
+		}
+
+		printf("%d\n", answer);
+	
+    }
+     
+    return 0;    
+}

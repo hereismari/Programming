@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
-#define MAX 505
 
+#define MAX 505
 int a[MAX], dp[MAX][MAX];
 
-int main()
-{
+int main() {
+
     int n, m, b, MOD;
     scanf("%d %d %d %d", &n, &m, &b, &MOD);
    
@@ -18,8 +18,7 @@ int main()
                 dp[j][k] = (dp[j][k] + dp[j - 1][k - a[i]]) % MOD;
    
     int answer = 0;
-    for(int i = 0; i <= b; i++) 
-        answer = (answer + dp[m][i]) % MOD;
+    for(int i = 0; i <= b; i++) answer = (answer + dp[m][i]) % MOD;
     printf("%d\n", answer);
     return 0;
 }
