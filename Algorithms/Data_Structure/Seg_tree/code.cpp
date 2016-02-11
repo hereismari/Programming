@@ -1,48 +1,100 @@
-#include <stdio.h>
-#define MAX 100
+/* Solution to http://codeforces.com/problemset/problem/339/D */
 
-using namespace std;
+#include <bits/stdc++.h> 
 
-int seg_tree[4*MAX];
-int array[MAX];
+#define MAX 500000
+#define EPS 1e-7
+#define MOD 1000000007
 
-void build(int id, int begin, int end){
-	
-	if(begin == end) { seg_tree[id] = id; return;}
-	
-	int middle = (begin + end)/2;
-	build(2*id,begin,middle);
-	build(2*id + 1,middle+1,end);
-	
-	seg_tree[id] = seg_tree[2*id] + seg_tree[2*id + 1];
+#define ll long long int
+#define F first
+#define S second 
+#define pb push_back
+#define mp make_pair 
+#define pii pair<int,int> 
+#define vi vector<int> 
+#define vpii vector<pair<int,int> >
+ 
+using namespace std; 
+
+struct data {
+	ll value;
+	bool orOperation;
+};
+
+data seg_tree[4*MAX];
+
+data make_data(ll value){
+	data result;
+	result.value = value;
+	result.orOperation = false;
+	return result;
+};
+
+data combine(data l, data r) {
+	data result;
+	result.value = (l.orOperation ? l.value ^ r.value : l.value | r.value);
+	result.orOperation = !l.orOperation;	
+	return result;
 }
 
-void update(int id, int begin, int end, int val, int pos){
+void build(int id, ll a[], int b, int e){
 
-	if(begin == end) { seg_tree[id] = val; return;}
+	if(b == e) { seg_tree[id] = make_data(a[b]); return;}
+
+	int m = (b+e)/2;
+
+	build(2*id, a, b, m);
+	build(2*id + 1, a, m + 1, e);
+
+	seg_tree[id] = combine(seg_tree[2*id], seg_tree[2*id + 1]);
+};
+
+void update(int id, int b, int e, int pos, ll value){
+
+	if(b == e) { seg_tree[id] = make_data(value); return; }
+
+	int m = (b+e)/2;
+
+	if(pos <= m) update(2*id, b, m, pos, value);
+	else update(2*id + 1, m+1, e, pos, value);
 	
-	int middle = (begin + end)/2;
-	if(pos <= middle) update(2*id,begin,middle,val,pos);
-	else update(2*id + 1,middle+1,end,val,pos);
-	
-	seg_tree[id] = seg_tree[2*id] + seg_tree[2*id + 1];
-}
-
-int getSum(int id, int begin, int end, int begin_sum, int end_sum){
-
-	if(end_sum < begin || begin_sum > end) return 0;
-	if(begin >= begin_sum && end <= end_sum) return seg_tree[id];
-
-	int middle = (begin + end)/2;
-	return getSum(2*id,begin,middle,begin_sum,end_sum) + getSum(2*id+1,middle+1,end,begin_sum,end_sum);
+	seg_tree[id] = combine(seg_tree[2*id], seg_tree[2*id + 1]);
 
 }
 
-int main(){
+data query(int id, int b, int e, int i, int j) {
+
+	if(i == b && j == e) return seg_tree[id];
+
+	int m = (b+e)/2;
+
+	if(j <= m) return query(2*id, b, m, i, j);
+	if(i > m) return query(2*id+1, m+1, e, i, j);
+	return combine(query(2*id, b, m, i, m), query(2*id+1, m+1, e, m+1, j));
+};
 
 
+int n, m;
+ll x, y;
 
+int main() {
+ 
+    while(scanf("%d %d", &n, &m) != EOF){
 
-	return 0;
+	n = pow(2, n);
+        ll v[MAX];
+        
+        for(int i = 1; i <= n; i++) scanf("%lld", &v[i]);
+
+	build(1, v, 1, n);
+
+        for(int i = 0; i < m; i++) {
+            scanf("%lld %lld", &x, &y);
+            update(1, 1, n, x, y);
+            printf("%lld\n", query(1, 1, n, 1, n).value);
+        }
+    }
+
+	return 0; 
 }
-
