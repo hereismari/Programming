@@ -26,17 +26,17 @@ void calc(int x, int danger){
 
 int main(){
 
-	char aux[100];
+    char aux[100];
     scanf("%s %s",a,aux); 
     for(int i = 0; i < 26; i++)
-		bad[i] = (aux[i] == '0');
+	bad[i] = (aux[i] == '0');
 
     scanf("%d",&k);
     n = strlen(a);   
-	for(int i = 0; i < n; i++)
-        ins(0,i);
+    for(int i = 0; i < n; i++)
+    ins(0,i);
     
-	calc(0,0);
+    calc(0,0);
     cout << ans << endl;
-	return 0;
+    return 0;
 }
