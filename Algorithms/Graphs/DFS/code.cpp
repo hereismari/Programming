@@ -25,9 +25,9 @@ void dfs(int v) {
 int main() {
 
 	//example
-	adj[1].push_back(make_pair(2,0));
-	adj[2].push_back(make_pair(3,1));
-	adj[3].push_back(make_pair(4,0));
+	adj[1].pb(make_pair(2,0));
+	adj[2].pb(make_pair(3,1));
+	adj[3].pb(make_pair(4,0));
 	
 	dfs(1);
 	for(int i = 0 ; i < tree.size() ; i++)
