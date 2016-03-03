@@ -4,22 +4,25 @@
 
 #define MAX 1000
 
+#define vi vector<int>
+#define vpi vector<pair<int,int> >
+#define pb push_back
+
 using namespace std;
 
-vector< pair<int,int> > adj[MAX]; 
-vector<int> tree;
+vpi adj[MAX]; 
+vi tree;
 bool visited[MAX];
 
-void dfs(int v){
-
-	tree.push_back(v);
+void dfs(int v) {
+	tree.pb(v);
 	visited[v] = true;
 	for(int i = 0 ; i < adj[v].size() ; i++)
 		if(!visited[adj[v][i].first])
 			dfs(adj[v][i].first);
 }
 
-int main(){
+int main() {
 
 	//example
 	adj[1].push_back(make_pair(2,0));
