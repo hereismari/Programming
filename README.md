@@ -1,2 +1,2 @@
 # Programming
-Repository with my competition programming code, and hopely tutorials about the topic and some algorithm implementations.
+Repository with my codes for competition programming, and hopefully tutorials about the topic and some algorithm implementations.
