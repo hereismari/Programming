@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 #define MAX 10000
-#define MAX_LOG 10000
+#define MAX_LOG 30
 
 using namespace std;
 
