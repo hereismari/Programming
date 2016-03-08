@@ -1,34 +1,57 @@
-#include <bits/stdc++.h>
+#include <bits/stdc++.h> 
 
-#define MAX 21
+#define MAX 22
+#define MAX2 5000000
+#define EPS 1e-7
+#define MOD 1000000007
+
 #define ll long long int
+#define F first
+#define S second 
+#define pb push_back
+#define mp make_pair 
+#define pii pair<int,int> 
+#define vi vector<int> 
+#define vpii vector<pair<int,int> >
 
-using namespace std;
+#define isBitOne(x, i) ((x >> i) & 1)
 
-bool mat[MAX][MAX];
-int n, t;
+using namespace std; 
 
-ll solve(int id, bitset<21> used) {
+int n, m, x, y, t;
+int mat[MAX][MAX];
+ll dp[MAX2];
 
-	if(id == n && valid(used)) return 1;
-	else if(id == n) return 0;
-	else if(dp[id]
-	
+ll solve() {
+    
+    dp[0] = 1; // if set is empty we did it :)!
 
+    for(int i = 1; i < (1 << n); i++) {
+
+        int aux = 0;
+        dp[i] = 0;
+
+        for(int j = 0; j < n; j++) aux += isBitOne(i, j);
+        for(int j = 0; j < n; j++) 
+            if(mat[aux - 1][j] && isBitOne(i, j))
+                dp[i] += dp[i & ~(1 << j)];
+    }
+
+    return dp[(1 << n) - 1];
 }
-
 
 int main() {
 
-	scanf("%d", &t);
-	while(t--) {
-		scanf("%d", &n);
-		for(int i = 0; i < n; i++)
-			for(int j = 0; j < n; j++)
-				scanf("%d", &mat[i][j]);
-		bitset<21> used(0);
-		printf("%lld\n", solve(0, used));
-	}
+    scanf("%d", &t);
+    while(t--) {
+        
+        scanf("%d", &n);
+        for(int i = 0; i < n; i++)
+            for(int j = 0; j < n; j++)
+                scanf("%d", &mat[i][j]);
+        
+        printf("%lld\n", solve());
+    }
 
-	return 0;
+	return 0; 
 }

@@ -1,53 +1,47 @@
-MAX = 1002
-tab = []
-vis = []
+#include <bits/stdc++.h> 
 
-for i in xrange(MAX):
-    tab.append([])
-    vis.append([])
-    for j in xrange(MAX):
-        tab[i].append(0)
-        vis[i].append(False)
+#define MAX 2100 
+#define EPS 1e-7
 
-def check1(x, y):
-    res = 0
-    while x < MAX and y < MAX:
-        res += tab[x][y]
-        vis[x][y] = True
-        x += 1
-        y += 1
-    return res
+#define ll long long int
+#define F first
+#define S second 
+#define pb push_back
+#define mp make_pair 
+#define pii pair<int,int> 
+#define vi vector<int> 
+#define vpii vector<pair<int,int> >
+ 
+using namespace std; 
 
-def check2(x, y):
-    res = 0
-    while x < MAX and y > 0:
-        res += tab[x][y]
-        vis[x][y] = True
-        x += 1
-        y -= 1
-    return res
+ll d1[2 * MAX], d2[2 * MAX], res[2], n;
+pii v[2];
+int mat[MAX][MAX];
 
-n = int(raw_input())
+void update(int c, int i, int j, ll val){
+    if(val > res[c]){
+        res[c] = val;
+        v[c].F = i;
+        v[c].S = j;
+    }
+}
 
-for i in xrange(n):
-    x, y = map(int, raw_input().split())
-    tab[x][y] = 1
+int main() {
 
-ans = 0
-for i in xrange(MAX):
-    for j in xrange(MAX):
-        if not vis[i][j]: 
-           res = check1(i,j)
-           ans += (res * (res-1)) / 2
-
-for i in xrange(MAX):
-    for j in xrange(MAX):
-        vis[i][j] = False
-
-for i in xrange(MAX):
-    for j in xrange(MAX):
-        if not vis[i][j]: 
-            res = check2(i,j)
-            ans += (res * (res-1)) / 2
-
-print ans
+    scanf("%lld", &n);
+	res[0] = res[1] = -1; 
+    for(int i = 1; i <= n; i++)
+        for(int j = 1; j <= n; j++) {
+            scanf("%d", &mat[i][j]);
+            d1[i + j] += mat[i][j];
+            d2[i - j + n] += mat[i][j];
+        }
+ 
+    for(int i = 1; i <= n; i++)
+        for(int j = 1;j <= n; j++)
+            update((i+j) % 2 == 1, i, j, d1[i+j] + d2[i-j+n] - mat[i][j]);
+    
+	printf("%lld\n", res[0] + res[1]);
+    printf("%d %d %d %d\n", v[0].F, v[0].S, v[1].F, v[1].S);
+	return 0;
+}

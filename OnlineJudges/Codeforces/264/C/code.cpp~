@@ -1,33 +1,47 @@
-def isBeautiful(s):
-    flag = False
-    for e in s:
-        if e not in ['1', '0']: return False
-        if e == '1' and flag: return False
-        if e == '1': flag = True
-    return True
+#include <bits/stdc++.h> 
 
-def zeros(s):
-    cont = 0
-    for e in s:
-        if e == '0': cont += 1
-    return cont
+#define MAX 2100 
+#define EPS 1e-7
 
-n = int(raw_input())
-l = raw_input().split()
+#define ll long long int
+#define F first
+#define S second 
+#define pb push_back
+#define mp make_pair 
+#define pii pair<int,int> 
+#define vi vector<int> 
+#define vpii vector<pair<int,int> >
+ 
+using namespace std; 
 
-ans = 0
-front = ""
+ll d1[2 * MAX], d2[2 * MAX], res[2], n;
+pii v[2];
+int mat[MAX][MAX];
 
-zero = False
+void update(int c, int i, int j, ll val){
+    if(val > res[c]){
+        res[c] = val;
+        v[c].F = i;
+        v[c].S = j;
+    }
+}
 
-for e in l:
-    if isBeautiful(e):
-        if e == '0': zero = True
-        else: ans += zeros(e)
-    else:
-        front = e
-if not zero: 
-    if front == "": front = '1'
-    ans2 = front + ans * '0'
-    print ans2
-else: print '0'
+int main() {
+
+    scanf("%d", &n);
+	res[0] = res[1] = -1; 
+    for(int i = 1; i <= n; i++)
+        for(int j = 1; j <= n; j++) {
+            scanf("%d", &mat[i][j]);
+            d1[i + j] += mat[i][j];
+            d2[i - j + n] += mat[i][j];
+        }
+ 
+    for(int i = 1; i <= n; i++)
+        for(int j = 1;j <= n; j++)
+            update((i+j) % 2 == 1, i, j, d1[i+j] + d2[i-j+n] - mat[i][j]);
+    
+	printf("%lld\n", res[0] + res[1]);
+    printf("%d %d %d %d\n", v[0].F, v[0].S, v[1].F, v[1].S);
+	return 0;
+}
