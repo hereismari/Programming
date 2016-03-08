@@ -6,12 +6,14 @@ using namespace std;
 
 ll a[MAX], n, k;
 ll aux[MAX];
+
 void update(ll x) {
     while(x < MAX) {
         a[x] += 1;
         x += (x & -x);
     }
 }
+
 ll query(ll x) {
     ll res = 0;
     while(x > 0) {
