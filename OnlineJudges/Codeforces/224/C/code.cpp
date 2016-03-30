@@ -70,8 +70,7 @@ int main() {
 				for(int i = 0; i < n-1; i++)
 					if(dif[i] == otherDiff) { pos = i; }
 
-				//printf("%d %d\n", mainDiff, otherDiff);
-				if(cont1 == 1 || cont2 == 1 && (mainDiff * 2 == otherDiff)) {
+				if((cont1 == 1 || cont2 == 1) && (mainDiff * 2 == otherDiff)) {
 					printf("1\n");
 					printf("%lld", a[pos] + mainDiff);
 				}
