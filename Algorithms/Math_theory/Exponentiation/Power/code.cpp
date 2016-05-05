@@ -1,20 +1,22 @@
 #include <bits/stdc++.h>
 
+#define ll long long int
+#define MOD 1000000007
+#define BASE 257
+
 using namespace std;
 
-long power(long num, long pow)
-{
-    if (pow == 0) return 1;
-    if (pow % 2 == 0)
-        return power(num*num, pow / 2);
-    else
-        return power(num, pow - 1) * num;
+ll power(ll num, ll pow) {
+    if (pow < 1) return 1;
+    ll result = power(num, pow/2);
+    result = (result * result) % MOD;
+    if (pow % 2)
+        result = (result * num) % MOD;
+	return result;
 }
 
 int main() {
-
-
-
-
-	return 0;
+    
+    printf("Modular Inverse of BASE: %lld\n", power(BASE, MOD-2));
+    return 0;
 }
