@@ -92,7 +92,6 @@ int verify3(int a, int b) {
 	return res;
 }
 
-
 int verify2(int a, int b, int c) {
 	
 	int div = verify3(a, b);
@@ -104,7 +103,6 @@ int verify2(int a, int b, int c) {
 	calcHash();
 	return min(int(s[b].size()), div) + min(int(s[c].size()), verify(c));
 }
-
 
 int main() {
 
