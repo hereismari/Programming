@@ -1,66 +1,63 @@
-#include <bits/stdc++.h>
+#include <bits/stdc++.h> 
 
-using namespace std;
+using namespace std; 
 
-void preprocess(string p, int v[]){
+/*
+ * C++ Program to Implement Knuth–Morris–Pratt Algorithm (KMP)
+ */
 
-    v[0] = 0; 
-    v[1] = 0;  
+int n, m;
 
-    int cur = 0;
-    int length = p.size();
+void preKMP(string pattern, int f[]) {
 
-    for(int j = 2; j < length; j++){
-        
-		while(cur != 0 && p[cur] != p[j-1])
-            cur = v[cur];
- 
-        if(p[cur] == p[j-1])
-            cur = cur + 1;
+    int k;
 
-        v[j] = cur;    
-	}
-}
- 
-void kmp(string pattern, string text, int v[]){
+    f[0] = 0; // this is always true
+    for (int i = 1; i < m; i++) {
 
-    preprocess(pattern, v);
-    int cur = 0; 
-    int length_text = text.size();
-    int length_pattern = pattern.size();
-    int flag = 0, j = 0;
-    while(j < length_text){
-       
-		 while(cur > 0 && pattern[cur] != text[j])
-            cur = v[cur];
- 
-        if(pattern[cur] == text[j]){
-            cur++;
-            if(cur == length_pattern){
-                cout << j - length_pattern + 1<< endl;
-                cur--;
-                cur = v[cur];
-                flag = 1;
-                j--;
-            }
+        k = f[i - 1]; // k is the length of the previous longest prefix/suffix
+        bool match = false;
+        while(true) {
+            if (pattern[k] == pattern[i]) { match = true; break; } // if match then it found the prefix/suffix 
+            if(k == 0) break;
+            else k = f[k-1]; // else keep looking in a smart way ;)!
         }
-        j++;
+
+        f[i] = (match) ? k + 1: 0; // if the prefix is != "" then the length is k+1.
     }
 }
  
-int main(){
+void kmp(string target, string pattern, int f[]) {
 
-    int length;
-    scanf("%d", &length);
-    while(1){
-        int v[length+1];
-		string text, pattern;
-        cin >> pattern >> text;
-        kmp(pattern, text,v);
-        if(scanf("%d",&length) == 1) cout << endl;
+    preKMP(pattern, f);     
+
+    int i = 0, j = 0;        
+    while (i < n) {
+        if (target[i] == pattern[j]) {
+            i++; j++;
+            if (j == m) { printf("%d\n",i-m); j = f[j-1];}
+        }
+        else if (j == 0) i++;
+        else j = f[j-1];
+    }
+}
+ 
+int main() {
+
+    bool flag = false;
+    scanf("%d", &m);
+    while(true) {
+        
+        int f[m];
+
+        string s, w;
+        cin >> w >> s;
+
+        n = s.size();
+        kmp(s, w, f);
+        if(scanf("%d", &m) == 1) cout << endl;
         else break;
     }
-
+    
     return 0;
 }
-

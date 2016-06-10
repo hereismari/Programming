@@ -30,7 +30,7 @@ void preKMP(string pattern) {
         bool match = false;
         do {
             if (pattern[k] == pattern[i]) { match = true; break; } // if match then it found the prefix/suffix 
-            else k = f[k]; // else keep looking in a smart way ;)!
+            else k = f[k-1]; // else keep looking in a smart way ;)!
         } while(k != 0);
 
         f[i] = (match) ? k + 1: 0; // if the prefix is != "" then the length is k+1.
@@ -45,7 +45,7 @@ void kmp(string target, string pattern) {
     while (i < n) {
         if (target[i] == pattern[j]) {
             i++; j++;
-            if (j == m) { printf("%d\n",i-m); j--; j = f[j];}
+            if (j == m) { printf("%d\n",i-m); j = f[j-1];}
         }
         else if (j == 0) i++;
         else j = f[j];
