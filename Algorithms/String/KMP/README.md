@@ -44,4 +44,4 @@ Try to implement it! Doubts? see the *code.cpp* file to see the implementantion 
 
 ### Other problems that it can solve?
 
-  - (SPOJ : NHAY - KMP)[http://br.spoj.com/problems/NHAY/]
+  - [SPOJ : NHAY - KMP](http://br.spoj.com/problems/NHAY/)
