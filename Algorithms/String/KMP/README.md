@@ -24,17 +24,18 @@ So, in the Prefix function what we want to do is define an array *__f__* that st
 
 Example:
 
-  w = “AAACAAAAAC”, f[] is [0, 1, 2, 0, 1, 2, 3, 3, 3, 4]. Because:
-    - "A", is the first letter so f[0] = 0 (this always happens)
-    - "AA", the maximum proper prefix which is also a suffix is "A" that has length 1, so f[1] = 1
-    - "AAA", the maximum proper prefix wnich is also a suffix is "AA" that has length 2, so f[2] = 2
-    - "AAAC", the maximum proper prefix wnich is also a suffix is "" that has length 0, so f[3] = 0
-    - "AAACA", the maximum proper prefix wnich is also a suffix is "A" that has length 1, so f[4] = 1
-    - "AAACAA", the maximum proper prefix wnich is also a suffix is "AA" that has length 2, so f[5] = 2
-    - "AAACAAA", the maximum proper prefix wnich is also a suffix is "AAA" that has length 2, so f[6] = 3
-    - "AAACAAAA", the maximum proper prefix wnich is also a suffix is "AAA" that has length 2, so f[7] = 3
-    - "AAACAAAA", the maximum proper prefix wnich is also a suffix is "AAA" that has length 2, so f[8] = 3
-    - "AAACAAAAC", the maximum proper prefix wnich is also a suffix is "AAAC" that has length 2, so f[9] = 4
+  w = “AAACAAAAAC”, f[] is [0, 1, 2, 0, 1, 2, 3, 3, 3, 4]. 
+  Because:
+  - "A", is the first letter so f[0] = 0 (this always happens)
+  - "AA", the maximum proper prefix which is also a suffix is "A" that has length 1, so f[1] = 1
+  - "AAA", the maximum proper prefix wnich is also a suffix is "AA" that has length 2, so f[2] = 2
+  - "AAAC", the maximum proper prefix wnich is also a suffix is "" that has length 0, so f[3] = 0
+  - "AAACA", the maximum proper prefix wnich is also a suffix is "A" that has length 1, so f[4] = 1
+  - "AAACAA", the maximum proper prefix wnich is also a suffix is "AA" that has length 2, so f[5] = 2
+  - "AAACAAA", the maximum proper prefix wnich is also a suffix is "AAA" that has length 2, so f[6] = 3
+  - "AAACAAAA", the maximum proper prefix wnich is also a suffix is "AAA" that has length 2, so f[7] = 3
+  - "AAACAAAA", the maximum proper prefix wnich is also a suffix is "AAA" that has length 2, so f[8] = 3
+  - "AAACAAAAC", the maximum proper prefix wnich is also a suffix is "AAAC" that has length 2, so f[9] = 4
 
 Then, the String Matching will consist of comparing *__s__* with *__w__* if a match happens (s[i] == w[j]) then
 continue comparing, if j == m it's a reeeal match! if s[i] != w[j], then j = f[j] (if j == 0: i++).
