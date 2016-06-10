@@ -43,3 +43,5 @@ continue comparing, if j == m it's a reeeal match! if s[i] != w[j], then j = f[j
 Try to implement it! Doubts? see the *code.cpp* file to see the implementantion in C++ with comments :smile:!
 
 ### Other problems that it can solve?
+
+  - (SPOJ : NHAY - KMP)[http://br.spoj.com/problems/NHAY/]
