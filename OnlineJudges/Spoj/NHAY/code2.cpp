@@ -1,25 +1,14 @@
 #include <bits/stdc++.h> 
 
-#define MAX 101001 
-#define ll long long int
-#define F first
-#define S second 
-#define pb push_back
-#define mp make_pair 
-#define pii pair<int,int> 
-#define vi vector<int> 
-#define vpii vector<pair<int,int> >
- 
 using namespace std; 
 
 /*
  * C++ Program to Implement Knuth–Morris–Pratt Algorithm (KMP)
  */
 
-int f[MAX];
 int n, m;
 
-void preKMP(string pattern) {
+void preKMP(string pattern, int f[]) {
 
     int k;
 
@@ -37,9 +26,9 @@ void preKMP(string pattern) {
     }
 }
  
-void kmp(string target, string pattern) {
+void kmp(string target, string pattern, int f[]) {
 
-    preKMP(pattern);     
+    preKMP(pattern, f);     
     
     int i = 0, j = 0;        
     while (i < n) {
@@ -52,14 +41,22 @@ void kmp(string target, string pattern) {
     }
 }
  
-int main(){
+int main() {
 
-    scanf("%d %d", &n, &m);
+    bool flag = false;
+    scanf("%d", &m);
+    while(true) {
+        
+        int f[m];
 
-    string s, w;
-    cin >> s >> w;
-    
-    kmp(s, w);
+        string s, w;
+        cin >> w >> s;
+
+        n = s.size();
+        kmp(s, w, f);
+        if(scanf("%d", &m) == 1) cout << endl;
+        else break;
+    }
     
     return 0;
 }
