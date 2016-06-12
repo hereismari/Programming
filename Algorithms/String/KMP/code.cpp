@@ -48,7 +48,7 @@ void kmp(string target, string pattern) {
             if (j == m) { printf("%d\n",i-m); j = f[j-1];}
         }
         else if (j == 0) i++;
-        else j = f[j];
+        else j = f[j-1];
     }
 }
  
