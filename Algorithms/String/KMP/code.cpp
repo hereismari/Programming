@@ -30,7 +30,7 @@ void preKMP(string pattern) {
         bool match = false;
         do {
             if (pattern[k] == pattern[i]) { match = true; break; } // if match then it found the prefix/suffix 
-            else k = f[k-1]; // else keep looking in a smart way ;)!
+            else if(k != 0) k = f[k-1]; // else keep looking in a smart way ;)!
         } while(k != 0);
 
         f[i] = (match) ? k + 1: 0; // if the prefix is != "" then the length is k+1.
