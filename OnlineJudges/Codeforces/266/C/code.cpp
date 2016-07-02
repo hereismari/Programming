@@ -12,8 +12,6 @@
 #define vi vector<int> 
 #define vpii vector<pair<int,int> >
 
-using namespace std;
-
 int a[MAX];
 ll cnt[MAX];
 

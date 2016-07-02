@@ -1,4 +1,4 @@
-def bin_search(x,lista):
+def bin_search(x, lista):
 	meio = (len(lista))/2
 	inicio = 0
 	fim = len(lista)
@@ -12,12 +12,16 @@ def bin_search(x,lista):
 
 n = int(raw_input())
 a = map(int,raw_input().split())
+
 m = int(raw_input())
 q = map(int,raw_input().split())
+
 aux = []
 soma_ac = 0
+
 for e in a:
 	soma_ac += e
 	aux.append(soma_ac)
+
 for e in q:
-	print bin_search(e,aux) + 1
+    print bin_search(e,aux) + 1

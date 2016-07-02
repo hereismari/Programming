@@ -11,7 +11,8 @@ for e in p:
         ans[i] += points/prizes[i]
         points -= (points/prizes[i]) * prizes[i]
 
-for e in ans: print e,
+for e in ans: 
+    print e,
 print
 print points
 
