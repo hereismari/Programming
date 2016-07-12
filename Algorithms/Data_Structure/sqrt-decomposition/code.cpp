@@ -18,14 +18,14 @@ using namespace std;
 #define INF 1000000000
 
 int n, m, x, y, root;
-int p, q, c, t;
-ll v;
 ll sqr[MAX], a[MAX], counter[MAX];
 
 void makeSqrt() {
+
     memset(counter, 0, sizeof counter);
     memset(sqr, 0, sizeof sqr);
-    memset(a, 0, sizeof a);
+    
+    for(int i = 0; i < n; i++) sqr[i/root] += a[i];
 }
 
 ll getQuery(int l, int r) { 
@@ -33,11 +33,11 @@ ll getQuery(int l, int r) {
     ll res = 0;
     for(int i = l; i <= r;) {
         if(i % root == 0 && i + root - 1 <= r) {
-            res += sqr[i/root] + counter[i/root] * root;
+            res += sqr[i/root];
             i += root;
         }
         else {
-            res += a[i] + counter[i/root];
+            res += a[i];
             i++;
         }
     }
@@ -45,42 +45,49 @@ ll getQuery(int l, int r) {
     return res;
 }
 
-void updateLazy(int l, int r, ll v) { 
+void updateLazy(int l, int r) { 
     for(int i = l; i <= r;) {
         if(i % root == 0 && i + root - 1 <= r) {
-            counter[i/root] += v;
+            counter[i/root]++;
             i += root;
         }
         else {
-            sqr[i/root] += v;
-            a[i] += v;
+            a[i] = max(0LL, a[i]-1);
+            sqr[i/root] = max(0LL, sqr[i/root]-1);
             i++;
         }
     }
 }
 
-int main() {
+void updateQuery(int i) {
     
-    root = (int) sqrt(MAX) + 1;
+    ll c = max(a[i] - counter[i/root], 0LL);
+    
+    ll l = max(i - c, 0LL);
+    ll r = min(i + c, (n-1)*1LL);
 
-    scanf("%d", &t);
-    while(t--) {
+    updateLazy(l, r);
+}
 
-        scanf("%d %d", &n, &m);
-        makeSqrt();
+int main() {
+ 
+    scanf("%d %d", &n, &m);
+    for(int i = 0; i < n; i++) scanf("%lld", &a[i]);
+    
+    root = (int) sqrt(n) + 1;
+    makeSqrt();
 
-        for(int i = 0; i < m; i++) {
-            scanf("%d", &c);
-            if(c == 0) {
-                scanf("%d %d %lld", &p, &q, &v);
-                updateLazy(p, q, v);
-            }
-            else {
-                scanf("%d %d", &p, &q);
-                printf("%lld\n", getQuery(p, q));
-            }
-        }
+    for(int i = 0; i < m; i++) {
+        scanf("%d", &x);
+        updateQuery(x-1);
     }
+
+    ll ans = 0;
+    for(int i = 0; i < n; i++) {
+        ans += max(0LL, a[i] - counter[i/root]);
+    }
+
+    printf("%lld\n", ans);
 
     return 0; 
 }

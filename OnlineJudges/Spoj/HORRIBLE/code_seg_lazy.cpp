@@ -9,7 +9,6 @@
  
 using namespace std;
  
-
 ll lazy[4 * MAX];
 ll tree[4 * MAX];
 ll arr[MAX];
@@ -79,7 +78,7 @@ int main() {
     while(t--) {
 		
 		memset(tree, 0, sizeof tree);
-		memset(sum, 0, sizeof sum);
+		memset(lazy, 0, sizeof lazy);
         scanf("%d %d", &n, &c);
         
         while(c--) {
