@@ -41,32 +41,26 @@ ll x;
 node a[MAX], b[MAX];
 
 void makeSqrt() {
-    for(int i = 0; i < n; i+= root)
+    for(int i = 0; i < n; i += root)
         sort(b + i, b + min(i + root, n));
 }
 
-int binSearch(int l, int r, ll v) {
-    while(l <= r) {
-        int mid = l + (r-l)/2;
-        if(b[mid].v < v) l = mid + 1;
-        else if(b[mid].v > v) r = mid - 1;
-        else if(l != r) l = mid;
-        else return mid;
-    }
-
-    return l;
+int binSearch(int l, int r, ll v) {    
+    node aux = node(0, v);
+    int cnt = upper_bound(b + l, b + r, aux) - (b+l);
+    return cnt;
 }
 
-ll getQuery(int l, int r, ll v) { 
+int getQuery(int l, int r, ll v) { 
 
-    ll res = 0;
-    for(int i = l; i <= r;) {
-        if(i % root == 0 && i + root - 1 <= r) {
-            res += binSearch(i, i + root -1, v);
+    int res = 0;
+    for(int i = l; i < r;) {
+        if(i % root == 0 && i + root <= r) {
+            res += binSearch(i, i + root, v);
             i += root;
         }
         else {
-            res += a[i].v <= v;
+            res += (a[i].v <= v);
             i++;
         }
     }
@@ -76,13 +70,13 @@ ll getQuery(int l, int r, ll v) {
 
 void update(int i, ll v) {
 
+    a[i].v = v;
     for(int j = i/root;; j++)
-        if(a[j].id == i) {
-            a[j].v = v;
+        if(b[j].id == i) {
             b[j].v = v;
-            sort(b + i/root * root, b + min(i/root * root + root, n));
             break;
         }
+    sort(b + i/root * root, b + min(i/root * root + root, n));
 }
 
 int main() {
@@ -95,16 +89,19 @@ int main() {
         b[i] = a[i];
     }
 
+    makeSqrt();
+
     for(int i = 0; i < m; i++) {
         scanf("\n%c", &c);
         if(c == 'C') {
             scanf("%d %d %lld", &p, &q, &x);
-            printf("%lld\n", getQuery(p-1, q-1, x));
+            printf("%d\n", getQuery(p-1, q, x));
         }
         else {
             scanf("%d %lld", &p, &x);
             update(p-1, x);
         }
+
     }
 
     return 0; 
