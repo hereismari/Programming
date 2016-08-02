@@ -43,7 +43,7 @@ int main(){
 	      scanf("%d %d",&a, &c); a--;
 	      res[a][n+a] = c;
 	    }
-	    for(int i = 0; i < E; i++){
+	    for(int i = 0; i < e; i++){
 	      scanf("%d %d %d",&a, &b, &c); a--; b--;
 	      res[n+a][b] = res[n+b][a] = c;
 	    }
