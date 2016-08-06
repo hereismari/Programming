@@ -1,3 +1,7 @@
+/*
+	http://www.spoj.com/problems/MTOTALF/
+*/
+
 #include <bits/stdc++.h>
 
 using namespace std;
