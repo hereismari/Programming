@@ -4,7 +4,8 @@
 
 using namespace std;
 
-struct bipartite_graph{
+struct bipartite_graph {
+	
     int V1,V2,*match;
     vector<int> *L;
     bool *visited;
@@ -25,7 +26,7 @@ struct bipartite_graph{
     }
     
     bool dfs(int u){
-        for(int i=L[u].size()-1;i>=0;--i){
+        for(int i = L[u].size()-1;i >= 0; i--){
             int v = L[u][i];
             if(!visited[v]){
                 visited[v] = true;
@@ -40,8 +41,8 @@ struct bipartite_graph{
     
     int maximum_matching(){
         int ans = 0;
-        fill(match,match+V2,-1);
-        for(int i=0;i<V1;++i){
+        fill(match, match + V2,-1);
+        for(int i=0 ; i < V1; ++i){
             fill(visited,visited+V2,false);
             ans += dfs(i);
         }
@@ -49,23 +50,25 @@ struct bipartite_graph{
     }
 };
 
-int main(){
+int main() {
+	
     int T,n,r,c;
     bipartite_graph G(120,120);
     
     scanf("%d",&T);
     
-    for(int tc=1;tc<=T;++tc){
+    for(int tc = 1;tc <= T; tc++) {
+		
         scanf("%d",&n);
         
         G.clear(120,120);
         
-        for(int i=0;i<n;++i){
+        for(int i = 0;i < n; i++){
             scanf("%d %d",&r,&c);
             G.add_edge(r,c);
         }
         
-        printf("%d\n",G.maximum_matching());
+        printf("%d\n", G.maximum_matching());
     }
     
     return 0;
