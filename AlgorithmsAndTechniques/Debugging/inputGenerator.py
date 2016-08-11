@@ -1,6 +1,6 @@
 from random import randint
 
-name = 'cdefghijkl'
+name = 'abcdefghijkl'
 
 for e in name:
 
