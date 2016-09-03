@@ -6,11 +6,11 @@ using namespace std;
 
 ll dp[1001];
 
-ll gcd(int a, int b){
+ll gcd(int a, int b) {
 	return b == 0 ? a : gcd(b, a % b);
 }
 
-ll answer(int x){
+ll answer(int x) {
 	if(dp[x] > 0) return dp[x];
 	int count = 0;
 	dp[x] = (answer(x-1) + 2);
