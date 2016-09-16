@@ -22,10 +22,12 @@ int size = 0;
 void topoSort() {
 
     while(!q.empty()) {
-	size++;        
-	int top = q.front(); q.pop();
-	color[top] = GREY;
-	ans.push(top);
+	    
+        size++;        
+	    int top = q.front(); q.pop();
+        color[top] = GREY;
+	    ans.push(top);
+
         for(int i = 0; i < adj[top].size(); i++){
             int v = adj[top][i];
             grau[v]--;
@@ -41,17 +43,20 @@ int main() {
 
         mapa.clear();
         nome.clear();
-	aux.clear();
+    	aux.clear();
+        
         for(int i = 1; i < MAX; i++) adj[i].clear();
+        
         memset(grau, 0, sizeof grau);
-	memset(color,WHITE, sizeof color);
+	    memset(color,WHITE, sizeof color);
+        
         int cont = 1;
-	size = 0;
+	    size = 0;
         for(int i = 0; i < n; i++){
             cin >> s;
             nome[cont] = s;
             mapa[s] = cont++;
-	    aux.push_back(s);
+	        aux.push_back(s);
         }
 
         for(int i = 0; i < n; i++){
@@ -62,16 +67,26 @@ int main() {
                 adj[mapa[s1]].pb(mapa[s]);
             }
         }
-	sort(aux.begin(), aux.end());
-	for(int i = 0; i < n; i++) if(grau[mapa[aux[i]]] == 0) q.push(mapa[aux[i]]);
+	
+        sort(aux.begin(), aux.end());
+	    for(int i = 0; i < n; i++) 
+            if(grau[mapa[aux[i]]] == 0) q.push(mapa[aux[i]]);
+        
         topoSort();
         printf("Teste %d\n",teste++);
-	if(size != n) {printf("impossible\n\n"); continue;}
-        if(!ans.empty()) { cout << nome[ans.front()]; ans.pop(); }
-        while(!ans.empty()) {
-            cout << " " + nome[ans.front()]; ans.pop();
+	    
+        if(size != n) printf("impossivel");
+        else {
+            if(!ans.empty()) { cout << nome[ans.front()]; ans.pop(); }
+            while(!ans.empty()) {
+                cout << " " + nome[ans.front()]; ans.pop();
+            }
         }
+        
+        while(!ans.empty()) ans.pop();
+
         printf("\n\n");
     }
+
     return 0;
 }

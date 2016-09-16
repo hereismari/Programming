@@ -26,8 +26,7 @@ int main() {
     printf("Teste %d\n", teste++);
     for(int i = 0; i < MAX_2; i++) 
 	for(int k = 0; k < MAX_1-1; k++)
-		if(ans[i][k] && i > 0) printf(" %d",k);
-		else if(ans[i][k]) printf("%d",k);
+		if(ans[i][k]) printf("%d ",k);
     printf("\n\n");
   }
 
