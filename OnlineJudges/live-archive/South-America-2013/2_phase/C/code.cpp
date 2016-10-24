@@ -27,7 +27,7 @@ int main() {
  
     ll n, m;
     while(scanf("%lld %lld",&n, &m) != EOF){	
-	printf("%lld\n", solve(m+1) - solve(n));
+	    printf("%lld\n", solve(m+1) - solve(n));
     }
 
 	return 0; 

@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
  
 #define INF 1e9
-#define MAXN 100
+#define MAXN 800
 #define min(a,b) a < b ? a : b
 int res[MAXN][MAXN], n;
 bool vis[MAXN];
@@ -49,4 +49,6 @@ int main(){
 	    }
 	    printf("%d\n",maxflow(0, 2*n-1));
 	  }
+
+    return 0;
 }

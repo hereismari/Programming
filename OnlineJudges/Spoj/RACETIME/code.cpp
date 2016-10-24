@@ -71,7 +71,7 @@ int getQuery(int l, int r, ll v) {
 void update(int i, ll v) {
 
     a[i].v = v;
-    for(int j = i/root;; j++)
+    for(int j = (i/root) * root;; j++)
         if(b[j].id == i) {
             b[j].v = v;
             break;
