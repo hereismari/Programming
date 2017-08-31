@@ -1,0 +1,65 @@
+4
+Y U A B 4
+Y U C A 1
+M U D B 6
+M B C D 2
+A D
+2
+Y U A B 10
+M U C D 20
+A D
+6
+Y U A Z 0
+Y U C A 0
+Y U A Y 0
+M U D Z 0
+M B C D 0
+M B C Y 0
+A D
+2
+Y U B D 0
+M U B D 0
+B B
+2
+Y U A B 0
+M U A B 0
+A C
+2
+Y U A B 0
+M U A B 0
+C C
+2
+Y U A Z 10
+Y U A B 20
+K K
+2
+Y U X Z 1
+Y U X Z 10
+X Z
+2
+M U X Z 1
+M U X Z 10
+X Z
+2
+M U X Z 1
+Y U X Z 10
+X Z
+2
+Y U A B 0
+M U B A 10
+A B
+3
+Y U A B 5
+M B B C 5
+M U B A 10
+A B
+3
+Y U X Y 5
+M B A Y 10
+Y B X Y 10
+X A
+2
+Y U A B 10
+Y U A B 100
+A B
+0

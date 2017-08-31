@@ -1,21 +1,24 @@
 # Programming
 
-Repository with my code for competitive programming, and hopefully tutorials about the topic and some algorithm implementations.
+Repository with code for competitive programming competitions and personal study.
 
-This repository has the following structure:
+There are tutorials and details about specific topics and algorithm implementations
+on the [`algorithms`](algorithms/) folder.
 
-* AlgorithmsAndTechniques  
-  
-  Implementation of different algorithms and other utilities (templates, scripts)
+## Repository Structure
 
-* Competitions  
+* [`algorithms`](algorithms/)
+
+  Tutorials and details about concepts and algorithms.
+
+* [`competitions`](competitions/)  
 
   Code for specific competitions
 
-* CPbook   
+* [`CP_book`](CP_book/)   
 
-  Solutions for CP book problems
+  Solutions for [CP 3 book](https://cpbook.net/#CP3details) problems.
 
-* OnlineJudges  
+* [`online_judges`](online_judges/)  
 
-  Solutions for problems of the most famous online judges
+  Solutions for problems available at online judges.
