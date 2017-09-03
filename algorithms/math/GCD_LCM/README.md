@@ -9,7 +9,7 @@ of two numbers using the
 
 ## Intuitive proofs
 
-* [Intuitive proof]http://people.cs.ksu.edu/~schmidt/301s14/Exercises/euclid_alg.html()
+* [Intuitive proof](http://people.cs.ksu.edu/~schmidt/301s14/Exercises/euclid_alg.html)
 
 * [Discussion at Quora](https://www.quora.com/Is-there-an-intuitive-explanation-for-Euclids-algorithm-to-find-the-GCD-of-two-numbers)
 
