@@ -1,10 +1,14 @@
 # Algorithms
 
-Some common problemms and famous algorithms used in coding competitions :smile:!
+Some common problems and famous algorithms used
+in coding competitions :smile:!
 
-For more details about a specific algorithm follow the links in the tables below.
-Sometimes multiple implmentations can be available, so the complexity and
-addiational memory available in the table are from the algorithm with the best
+For more details about a specific algorithm follow
+the links in the tables below.
+
+Sometimes multiple implementations can be available, so the
+complexity and additional memory available in the table
+are from the algorithm with the best
 efficiency. 
 
 ### Graphs
@@ -36,7 +40,7 @@ efficiency.
 | -------------------------------------------------- | ------------------------------------------------- | ---------- | ----------------- |
 | [`Base Converstion`](math/base_conversion/)        | Longest common subsequence.                       | TODO       | TODO              |
 | [`Fast exponentiation`](math/exponentiation/)      | Fast Exponentiation.                              | O(logN)    | TODO              |
-| [`GCD and LCM`](math/GCD_LCM)                      | GCD and LCM.                                      | TODO       | TODO              |
+| [`GCD and LCM`](math/GCD_LCM)                      | GCD and LCM.                                      | log(x, y) | recursion          |
 | [`Extended Euclidean`](math/extended_euclidean)    | a * **x** + b * **y** = GCD(a, b).                | TODO       | TODO              |
   
 ### Data Structure
