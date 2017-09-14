@@ -15,4 +15,4 @@
 ### Bitwise operations
 
 * [Wikipedia](https://en.wikipedia.org/wiki/Bitwise_operations_in_C)
-
+* [BitHacks](http://graphics.stanford.edu/~seander/bithacks.html)
