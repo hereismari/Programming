@@ -11,3 +11,8 @@
 
 * [Pointers](http://www.cplusplus.com/doc/tutorial/pointers/)
 
+
+### Bitwise operations
+
+* [Wikipedia](https://en.wikipedia.org/wiki/Bitwise_operations_in_C)
+
