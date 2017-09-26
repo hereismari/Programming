@@ -1,8 +1,9 @@
-#Geometry
+# Geometry
 
 Dot product:
   The dot product of two vectors u and v is a real number determined by:
-    #u ⋅ v = |v||u|cos θ, 0 π ≤ θ ≤ , θ it's the angle between u e v.
+  
+    u ⋅ v = |v||u|cos θ, 0 π ≤ θ ≤ , θ it's the angle between u e v.
   
   Properties 
 
@@ -15,7 +16,8 @@ Dot product:
   
 Cross product:
   The cross product of two vectors u and v it's a vector determined by :
-     #w = u x v = |u||v|sin θ, 0 π ≤ θ ≤ , θ it's the angle between u e v.
+  
+    w = u x v = |u||v|sin θ, 0 π ≤ θ ≤ , θ it's the angle between u e v.
   
   Properties
  
