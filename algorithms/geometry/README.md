@@ -4,6 +4,7 @@ Dot product:
   The dot product of two vectors u and v is a real number determined by:
   
     u ⋅ v = |v||u|cos θ, 0 π ≤ θ ≤ 2 π, θ it's the angle between u e v.
+    u . v = [u] X transpose([v]) 
   
   Properties 
 
@@ -18,6 +19,10 @@ Cross product:
   The cross product of two vectors u and v it's a vector determined by :
   
     w = u x v = |u||v|sin θ, 0 π ≤ θ ≤ 2 π, θ it's the angle between u e v.
+    
+    w = u x v = determinant([ [i,  j,   k],
+                              [u1, u2, u3],
+                              [v1, v2, v3] ])
   
   Properties
  
