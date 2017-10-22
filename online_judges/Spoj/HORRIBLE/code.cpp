@@ -29,7 +29,6 @@ void makeSqrt() {
 }
 
 ll getQuery(int l, int r) { 
-
     ll res = 0;
     for(int i = l; i <= r;) {
         if(i % root == 0 && i + root - 1 <= r) {

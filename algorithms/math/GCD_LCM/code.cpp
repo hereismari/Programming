@@ -15,4 +15,3 @@ int main() {
 
     printf("gcd: %d, lcm: %d\n", gcd(a, b), lcm(a, b));
 }
-
