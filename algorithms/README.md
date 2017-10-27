@@ -15,23 +15,23 @@ efficiency.
 
 | Name                                                 | Simple Description                                | Complexity | Additional Memory |
 | ---------------------------------------------------- | ------------------------------------------------- | ---------- | ----------------- |
-| [`BFS`](graphs/BFS/)                                 | Shortest Path between a node and all others.      | TODO       | TODO              |
-| [`DFS`](graphs/DFS/)                                 | Simple algorithm to walk in a graph.              | TODO       | TODO              |
+| [`BFS`](graphs/BFS/)                                 | Shortest Path between a node and all others.      | O(E + V)   | O(V)              |
+| [`DFS`](graphs/DFS/)                                 | Simple algorithm to walk in a graph.              | O(E + V)   | O(V)              |
 | [`Maximum Flow`](graphs/max_flow/)                   | Multiple implementations for Max. Flow.           | TODO       | TODO              |
 | [`Kruskal`](graphs/kruskal/)                         | Find Minimum Spanning Tree in a graph.            | TODO       | TODO              |
 | [`Lowest Common Ancestor`](graphs/LCA/)              | Lowest common ancestor of a node.                 | TODO       | TODO              |
-| [`Max. match in bipartite graph`](graphs/max_match/) | Maxmimum match in a bipartite graph.              | TODO       | TODO              |
-| [`TopologicalSort`](graphs/topo_sort/)               | Find "execution" order in a direct graph.         | TODO       | TODO              |
+| [`Max. match in bipartite graph`](graphs/max_match/) | Maximum match in a bipartite graph.              | TODO        | TODO              |
+| [`TopologicalSort`](graphs/topo_sort/)               | Find "execution" order in a direct graph.         | O(E + V)   | O(V)             |
 
 ### Dynamic Programming
 
 | Name                                               | Simple Description                                | Complexity | Additional Memory |
 | -------------------------------------------------- | ------------------------------------------------- | ---------- | ----------------- |
-| [`LCS`](dp/LCS/)                                   | Longest common subsequence.                       | TODO       | TODO              |
-| [`LIS`](dp/LIS/)                                   | Longest increasing sequence.                      | TODO       | TODO              |
+| [`LCS`](dp/LCS/)                                   | Longest common subsequence.                       | O(N * M)       | O(N * M)              |
+| [`LIS`](dp/LIS/)                                   | Longest increasing sequence.                      | O(N * M)       | O(N * M)            |
 | [`Travelling Salesman Problem`](dp/TSP)            | Travelling Salesman Problem (NP-Hard).            | TODO       | TODO              |
 | [`String Distance`](dp/string_distance/)           | Find the min. changes to make 2 strings equal     | TODO       | TODO              |
-| [`Knapsack Problem`](dp/knapsack/)                 | Knapsack Problem.                                 | TODO       | TODO              |
+| [`Knapsack Problem`](dp/knapsack/)                 | Knapsack Problem.                                 | O(C * N)       | O(C * N)              |
 | [`Min. steps to 1`](dp/min_steps_1/)               | A good initial problem for beginners.             | TODO       | TODO              |
 
 ### Math
@@ -39,8 +39,8 @@ efficiency.
 | Name                                               | Simple Description                                | Complexity | Additional Memory |
 | -------------------------------------------------- | ------------------------------------------------- | ---------- | ----------------- |
 | [`Base Converstion`](math/base_conversion/)        | Longest common subsequence.                       | TODO       | TODO              |
-| [`Fast exponentiation`](math/exponentiation/)      | Fast Exponentiation.                              | O(logN)    | TODO              |
-| [`GCD and LCM`](math/GCD_LCM)                      | GCD and LCM.                                      | log(x, y) | recursion          |
+| [`Fast exponentiation`](math/exponentiation/)      | Fast Exponentiation.                              | O(logN)    | O(logN)              |
+| [`GCD and LCM`](math/GCD_LCM)                      | GCD and LCM.                                      | log(x, y) | log(x, y)          |
 | [`Extended Euclidean`](math/extended_euclidean)    | a * **x** + b * **y** = GCD(a, b).                | TODO       | TODO              |
   
 ### Data Structure
