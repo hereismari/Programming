@@ -22,22 +22,27 @@ ll query(ll x) {
     }
     return res;
 }
-int main(){
 
-    	int x;
+int main() {
+
+  int x;
 	scanf("%lld\n",&n);
+	
 	for(int i = 0 ; i < n ; i++){
-
-        memset(a,0,sizeof a);
-        scanf("%lld",&k);
-        for(int j = 0; j < k; j++) scanf("%lld",&aux[j]);
-        ll ans = 0;
-		for(int j = k-1; j >=0; j--){
-            ans += query(aux[j]-1);
-            update(aux[j]);
-        }
-
-        printf("%lld\n",ans);
+    
+    memset(a, 0, sizeof a);
+    
+    scanf("%lld", &k);
+    for(int j = 0; j < k; j++) scanf("%lld", &aux[j]);
+    
+    ll ans = 0;
+	  
+	  for(int j = k-1; j >=0; j--){
+      ans += query(aux[j]-1);
+      update(aux[j]);
     }
+
+      printf("%lld\n",ans);
+  }
 	return 0;
 }
