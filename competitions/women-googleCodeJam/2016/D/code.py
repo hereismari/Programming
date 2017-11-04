@@ -5,9 +5,7 @@ t = int(raw_input())
 A = 'QWERTYUIOPLKJHGFDSAZXCVBNM'
 
 def solve(passwords):
-
     cont = 0
-
     a = list(A)
 
     while cont < 10000:

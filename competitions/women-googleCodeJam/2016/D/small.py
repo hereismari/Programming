@@ -3,7 +3,6 @@ t = int(raw_input())
 A1 = 'QWERTYUIOPLKJHGFDSAZXCVBNM'
 A2 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 def solve(res, alpha, passwords):
-
     for p in passwords:
         if p in A1 and p in A2:
             return 'IMPOSSIBLE'
