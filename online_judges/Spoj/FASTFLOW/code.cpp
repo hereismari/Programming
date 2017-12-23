@@ -81,10 +81,10 @@ int main() {
     int n,m,u,v,c;
     scanf("%d %d",&n,&m);
     
-    for(int i = 0; i < m; i++){
+    for(int i = 0; i < m; i++) {
 		
-		scanf("%d %d %d",&u,&v,&c);
-		addEdge(u,v,c);
+		  scanf("%d %d %d",&u,&v,&c);
+		  addEdge(u,v,c);
 		
     }
     

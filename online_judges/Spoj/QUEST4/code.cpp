@@ -59,13 +59,13 @@ int main() {
     
     for(int tc = 1;tc <= T; tc++) {
 		
-        scanf("%d",&n);
+        scanf("%d", &n);
         
         G.clear(120,120);
         
         for(int i = 0;i < n; i++){
-            scanf("%d %d",&r,&c);
-            G.add_edge(r,c);
+            scanf("%d %d", &r, &c);
+            G.add_edge(r, c);
         }
         
         printf("%d\n", G.maximum_matching());

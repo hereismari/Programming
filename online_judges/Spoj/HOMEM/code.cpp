@@ -60,7 +60,7 @@ struct Segtree {
     
     node update(int id, int a, int b, int i, int j, int carry, int inc) {
         
-		T[id].rotate(carry);
+		    T[id].rotate(carry);
 
         if (i > b || j < a) return node(0);
         if (i <= a && b <= j) return T[id].rotate(inc);
