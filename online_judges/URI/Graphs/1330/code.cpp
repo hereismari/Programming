@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#define MAX 12200
+#define MAX 20000
 
 struct bipartite_graph {
 	
@@ -25,12 +25,15 @@ struct bipartite_graph {
         L[v1].push_back(v2);
     }
     
-    bool dfs(int u) {
+    bool dfs(int u, int redo=0) {
+    
         for(int i = L[u].size() - 1;i >= 0; i--){
+            
             int v = L[u][i];
-            if(!visited[v]){
+            
+            if(!visited[v]) {
                 visited[v] = true;
-                if(match[v] == 0 || dfs(match[v])){
+                if(match[v] == 0 || dfs(match[v], u)){
                     match[v] = u;
                     return true;
                 }
@@ -39,12 +42,12 @@ struct bipartite_graph {
         return false;
     }
     
-    int maximum_matching() {
+    int maximum_matching(set<int> s) {
         int ans = 0;
         memset(match, 0, sizeof match);
-        for(int i = 1; i < V1; ++i) {
-            memset(visited, 0, sizeof visited);
-            ans += dfs(i);
+        for(auto f: s) {
+            fill(visited, visited + V1, false);
+            ans += dfs(f);
         }
         return ans;
     }
@@ -63,7 +66,8 @@ int main() {
       scanf("%d", &T);
       
       int mat[120][120];
-      memset(mat, 0, sizeof mat);
+      for(int i = 0; i < 120; i++)
+        for(int j = 0; j < 120; j++) mat[i][j] = 0;
  
       int x, y;
       for(int tc = 1; tc <= T; tc++) {
@@ -71,13 +75,20 @@ int main() {
         mat[x][y] = 1;
       }
       
+      set<int> s;
+      
       for(int i = 1; i <= n; i++) {
         for(int j = 1; j < m; j++) {
           if(mat[i][j] == 0 && mat[i][j+1] == 0) {
-            if((i % 2 == 1 && j % 2 == 0) || (i % 2 == 0 && j % 2 == 1))
+            //printf("%d %d\n", i , j);
+            if((i % 2 == 1 && j % 2 == 0) || (i % 2 == 0 && j % 2 == 1)) {
               G.add_edge(i * m + j, i * m + j + 1);
-            else
+              s.insert(i * m + j);
+            }
+            else {
               G.add_edge(i * m + j + 1, i * m + j);
+              s.insert(i * m + j + 1);
+            }
           }
         }
       }
@@ -85,15 +96,20 @@ int main() {
       for(int j = 1; j <= m; j++) {
         for(int i = 1; i < n; i++) {
           if(mat[i][j] == 0 && mat[i+1][j] == 0) {
-            if((i % 2 == 1 && j % 2 == 0) || (i % 2 == 0 && j % 2 == 1))
+            
+            if((i % 2 == 1 && j % 2 == 0) || (i % 2 == 0 && j % 2 == 1)) {
               G.add_edge(i * m + j, (i+1) * m + j);
-            else
+              s.insert(i * m + j);
+            }
+            else {
               G.add_edge((i+1) * m + j, i * m + j);
+              s.insert((i+1) * m + j);
+            }
           }
         }
       }
  
-      printf("%d\n", G.maximum_matching());
+      printf("%d\n", G.maximum_matching(s));
     }
     
     return 0;

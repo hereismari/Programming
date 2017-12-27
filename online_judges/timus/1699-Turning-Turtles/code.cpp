@@ -11,7 +11,7 @@ using namespace std;
 #define S second
 #define pb push_back
 
-#define MAX_E 300010
+#define MAX_E 100010
 
 #define LEFT 1
 #define DOWN 0
@@ -124,7 +124,6 @@ int main() {
     // clean graph
     memset(par, -1, sizeof par);
     memset(level, -1, sizeof level);
-    
     for(int i = 0; i <= n * m; i++) { 
       graph[i].clear();
     }
@@ -163,7 +162,6 @@ int main() {
     // build level
     level[first_non_zero] = 0;
     nodes[first_non_zero].turns = 0;
-    nodes[first_non_zero].dir = DOWN;
     par[first_non_zero] = first_non_zero;
     build_level(first_non_zero, first_non_zero);
     
