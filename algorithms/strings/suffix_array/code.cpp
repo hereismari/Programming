@@ -16,8 +16,9 @@ int n,m,x,y;
 int aux_array[MAX];
 int suffix_array[MAX];
 
-void countingSort(int k) { //classic counting sort, just be careful about index access                                         
+void countingSort(int k) {
 
+  //classic counting sort, just be careful about index
   int sum, maxi = max(300, n);
   int count[MAX];
   int temp_suffix_array[MAX];
