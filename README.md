@@ -13,7 +13,7 @@ on the [`algorithms`](algorithms/) folder.
 
 * [`competitions`](competitions/)  
 
-  Code for specific competitions
+  Code for specific competitions.
 
 * [`CP_book`](CP_book/)   
 
